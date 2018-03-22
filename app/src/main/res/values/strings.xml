@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">Final_Project_Client</string>
+    <string name="app_name">השכרת דירות BGU</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="minimal_cost">מחיר התחלתי</string>
+    <string name="maximal_cost">מחיר מקסימלי</string>
+    <string name="cost_to_from">-</string>
+    <string name="shekel">\\u0026</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="reminder">reminder</string>
+    <string name="done">done</string>
+    <string name="to">To</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="map_mode" >מפה</string>
+    <string name="record_mode" >רשומות</string>
+    <string name="RecentlyResults">תוצאות קודמות</string>
+    <string name="NextResults">תוצאות הבאות</string>
 </resources>
