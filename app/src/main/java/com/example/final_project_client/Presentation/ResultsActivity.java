@@ -1,15 +1,21 @@
-package com.example.final_project_client;
+package com.example.final_project_client.Presentation;
 
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.app.FragmentTransaction;
 
+import com.example.final_project_client.Presentation.ListViewFragment;
+import com.example.final_project_client.Presentation.MapViewFragment;
+import com.example.final_project_client.R;
+
 
 public class ResultsActivity extends AppCompatActivity {
+
 
     private MapViewFragment mapViewFragment;
     private ListViewFragment listViewFragment;
@@ -18,11 +24,11 @@ public class ResultsActivity extends AppCompatActivity {
     private Button btnNextResults;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresults);
-
 
 
             if (savedInstanceState != null) {
@@ -33,6 +39,7 @@ public class ResultsActivity extends AppCompatActivity {
             btnMode = findViewById(R.id.BtnMode);
             btnRecentlyResults = findViewById(R.id.BtnRecentlyResults);
             btnNextResults = findViewById(R.id.BtnNextResults);
+
 
         mapViewFragment.setArguments(getIntent().getExtras());
         getFragmentManager().beginTransaction()
@@ -59,6 +66,8 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 

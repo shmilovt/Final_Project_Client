@@ -1,4 +1,4 @@
-package com.example.final_project_client;
+package com.example.final_project_client.Presentation;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

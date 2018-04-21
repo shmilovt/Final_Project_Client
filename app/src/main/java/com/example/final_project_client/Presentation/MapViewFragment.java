@@ -1,4 +1,4 @@
-package com.example.final_project_client;
+package com.example.final_project_client.Presentation;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.final_project_client.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -58,11 +59,29 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng BeerSheva = new LatLng(31.261129, 34.798384);
+        LatLng BeerSheva1 = new LatLng(31.261129, 34.798384);
+        LatLng BeerSheva2 = new LatLng(31.263432, 34.794884);
+        LatLng BeerSheva3 = new LatLng(31.262129, 34.797384);
+        LatLng BeerSheva4 = new LatLng(31.256561, 34.794576);
+        LatLng BeerSheva5 = new LatLng(31.270088, 34.779584);
+        LatLng BeerSheva6 = new LatLng(31.280991, 34.799228);
+        LatLng BeerSheva7 = new LatLng(31.263732, 34.794841);
 
-        mMap.addMarker(new MarkerOptions().position(BeerSheva).title("Marker in Sydney").snippet("Population: 4,137,400"));
-        CameraUpdateFactory.zoomTo(17);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(BeerSheva));
+        LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
+
+
+        mMap.addMarker(new MarkerOptions().position(BeerSheva1));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva2));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva3));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva4));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva5));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva6));
+        mMap.addMarker(new MarkerOptions().position(BeerSheva7).title("אלכסנדר ינאי 17").snippet("קומה: 5" + "\n" +
+                "מספר שותפים: 2" +"\n"+
+                "מחיר: 2900"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(BeershebaCenter));
+        mMap.setMinZoomPreference(12.9f);
     }
 
 
