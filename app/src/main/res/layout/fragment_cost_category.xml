@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:id="@+id/costCategory">
+    android:id="@+id/costCategory"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <TextView
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sheqel" />
 
     <EditText
         android:id="@+id/editTextMinCost"
@@ -24,16 +21,19 @@
         android:inputType="number" />
 
     <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sheqel"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
 
         android:text="@string/hyphen" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sheqel" />
 
     <EditText
         android:id="@+id/editTextMaxCost"
@@ -44,5 +44,9 @@
         android:textAlignment="center"
         android:hint="@string/maximal_cost"
         android:inputType="number" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sheqel" />
 
 </LinearLayout>

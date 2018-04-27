@@ -21,4 +21,6 @@
     <string name="hyphen">\u2010</string>
     <string name="maximal_floor">קומה מקסימלית</string>
     <string name="minimal_floor">קומה התחלתית</string>
+    <string name="addCategory">הוספה</string>
+    <string name="RemoveCategory">הסרה</string>
 </resources>

@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:layout_above="@id/BtnSearch">
+    android:layout_above="@id/ChangeSetOfCategories">
 
     <LinearLayout
         android:id="@+id/linearLayout_scrollView"
@@ -105,9 +105,34 @@
             android:layout_height="wrap_content"
             >
         </FrameLayout>
-
     </LinearLayout>
 </ScrollView>
+    <LinearLayout
+        android:id="@+id/ChangeSetOfCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/BtnSearch"
+        >
+
+        <Button
+            android:id="@+id/BtnAddCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickOnBtnAddCategory"
+            android:text="@string/addCategory"
+           />
+        <Button
+            android:id="@+id/BtnRemoveCategory"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clickOnBtnRemoveCategory"
+            android:layout_height="wrap_content"
+            android:text="@string/RemoveCategory"
+            />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/BtnSearch"
@@ -115,6 +140,7 @@
         android:layout_height="wrap_content"
         android:onClick="openResultsActivity"
         android:layout_alignParentBottom="true"
-        android:text="@string/search" />
+        android:text="@string/search"
+     />
 
 </RelativeLayout>
