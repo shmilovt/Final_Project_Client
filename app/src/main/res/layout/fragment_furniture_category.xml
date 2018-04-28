@@ -3,26 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/category_background"
-    android:orientation="horizontal">
+    >
 
     <TextView
-        android:id="@+id/txtNeighborhood"
+        android:id="@+id/txtFurniture"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="@string/neighborhood"
+        android:text="@string/furniture"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
-       />
+        />
 
     <Spinner
-        android:id="@+id/spinnerNeighborhood"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/txtNeighborhood"
+        android:layout_below="@id/txtFurniture"
         android:drawSelectorOnTop="true"
-        android:entries="@array/array_neighborhoodNames"
+        android:entries="@array/furniture"
         android:textAlignment="center"
-
         >
     </Spinner>
 

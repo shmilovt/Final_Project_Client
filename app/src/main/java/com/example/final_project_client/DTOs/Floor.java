@@ -1,4 +1,4 @@
-package com.example.final_project_client.UserSearchingUtils;
+package com.example.final_project_client.DTOs;
 
 public class Floor {
     private int minFloor;

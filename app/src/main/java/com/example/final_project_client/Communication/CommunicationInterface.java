@@ -1,5 +1,5 @@
 package com.example.final_project_client.Communication;
-import com.example.final_project_client.UserSearchingUtils.SearchResults;
+import com.example.final_project_client.DTOs.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**

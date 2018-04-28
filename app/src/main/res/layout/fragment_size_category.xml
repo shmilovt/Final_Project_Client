@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/floor"/>
+        android:text="@string/size"/>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -19,13 +19,13 @@
     android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/editTextMinFloor"
+        android:id="@+id/editTextMinSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:maxLength="2"
-        android:hint="@string/minimal_floor"
+        android:maxLength="3"
+        android:hint="@string/minimal_size"
         android:inputType="number" />
 
     <TextView
@@ -37,16 +37,14 @@
 
 
     <EditText
-        android:id="@+id/editTextMaxFloor"
+        android:id="@+id/editTextMaxSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="@string/maximal_floor"
+        android:hint="@string/maximal_size"
         android:inputType="number"
-        android:maxLength="2"
+        android:maxLength="3"
         android:textAlignment="center" />
-
-
 
 </LinearLayout>
 

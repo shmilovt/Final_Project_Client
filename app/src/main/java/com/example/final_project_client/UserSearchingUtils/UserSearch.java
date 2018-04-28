@@ -1,26 +1,37 @@
 package com.example.final_project_client.UserSearchingUtils;
 
+import com.example.final_project_client.DTOs.CategoryType;
+import com.example.final_project_client.DTOs.Cost;
+import com.example.final_project_client.DTOs.DistanceFromUniversity;
+import com.example.final_project_client.DTOs.Floor;
+import com.example.final_project_client.DTOs.Furniture;
+import com.example.final_project_client.DTOs.NumberOfRoomates;
+import com.example.final_project_client.DTOs.Size;
+
 public class UserSearch {
 
-    private CategoryType [] priorities;
+    private CategoryType[] priorities;
     private String neighborhood;
-    private Integer distanceFromUniversity;
+    private DistanceFromUniversity distanceFromUniversity;
     private Floor floor;
     private Cost cost;
+    private Size size;
     private Furniture furniture;
-    private NumberOfRooms numberOfRooms;
+    private double numberOfRooms;
     private NumberOfRoomates numberOfMates;
-    private Boolean balcony;
-    private Boolean animals;
-    private Boolean protectedSpace;
-    private Boolean yard;
-    private Boolean warehouse;
+    private boolean balcony;
+    private boolean animals;
+    private boolean protectedSpace;
+    private boolean yard;
+    private boolean warehouse;
 
     public UserSearch(){}
+
 
     public CategoryType[] getPriorities() {
         return priorities;
     }
+
 
     public void setPriorities(CategoryType[] priorities) {
         this.priorities = priorities;
@@ -34,11 +45,11 @@ public class UserSearch {
         this.neighborhood = neighborhood;
     }
 
-    public Integer getDistanceFromUniversity() {
+    public DistanceFromUniversity getDistanceFromUniversity() {
         return distanceFromUniversity;
     }
 
-    public void setDistanceFromUniversity(Integer distanceFromUniversity) {
+    public void setDistanceFromUniversity(DistanceFromUniversity distanceFromUniversity) {
         this.distanceFromUniversity = distanceFromUniversity;
     }
 
@@ -58,6 +69,14 @@ public class UserSearch {
         this.cost = cost;
     }
 
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
     public Furniture getFurniture() {
         return furniture;
     }
@@ -66,11 +85,11 @@ public class UserSearch {
         this.furniture = furniture;
     }
 
-    public NumberOfRooms getNumberOfRooms() {
+    public double getNumberOfRooms() {
         return numberOfRooms;
     }
 
-    public void setNumberOfRooms(NumberOfRooms numberOfRooms) {
+    public void setNumberOfRooms(double numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
 
@@ -82,43 +101,43 @@ public class UserSearch {
         this.numberOfMates = numberOfMates;
     }
 
-    public Boolean getBalcony() {
+    public boolean isBalcony() {
         return balcony;
     }
 
-    public void setBalcony(Boolean balcony) {
+    public void setBalcony(boolean balcony) {
         this.balcony = balcony;
     }
 
-    public Boolean getAnimals() {
+    public boolean isAnimals() {
         return animals;
     }
 
-    public void setAnimals(Boolean animals) {
+    public void setAnimals(boolean animals) {
         this.animals = animals;
     }
 
-    public Boolean getProtectedSpace() {
+    public boolean isProtectedSpace() {
         return protectedSpace;
     }
 
-    public void setProtectedSpace(Boolean protectedSpace) {
+    public void setProtectedSpace(boolean protectedSpace) {
         this.protectedSpace = protectedSpace;
     }
 
-    public Boolean getYard() {
+    public boolean isYard() {
         return yard;
     }
 
-    public void setYard(Boolean yard) {
+    public void setYard(boolean yard) {
         this.yard = yard;
     }
 
-    public Boolean getWarehouse() {
+    public boolean isWarehouse() {
         return warehouse;
     }
 
-    public void setWarehouse(Boolean warehouse) {
+    public void setWarehouse(boolean warehouse) {
         this.warehouse = warehouse;
     }
 }

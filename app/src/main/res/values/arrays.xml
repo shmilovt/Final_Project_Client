@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_neighborhoodNames" >
+        <item>לא נבחר</item>
+        <item>רמות</item>
+        <item>שכונה א</item>
+        <item>שכונה ב</item>
+        <item>שכונה ג</item>
+        <item>שכונה ד</item>
+        <item>שכונה ה</item>
+        <item>שכונה ו החדשה</item>
+        <item>שכונה ט</item>
+        <item>שכונה יא</item>
+        <item>העיר העתיקה</item>
+        <item>שכונת דרום</item>
+        <item>שיכון דרום</item>
+        <item>המרכז האזרחי</item>
+        <item>נאות אלון</item>
+        <item>נווה זאב</item>
+        <item>נווה נוי</item>
+        <item>נחל בקע</item>
+        <item>נחל עשן</item>
+        <item>נווה מנחם</item>
+        <item>הסיגליות</item>
+    </string-array>
+
+    <string-array name="distanceFromUniversity" >
+        <item>לא נבחר</item>
+        <item>עד 5 דקות</item>
+        <item>עד 10 דקות</item>
+        <item>עד 15 דקות</item>
+        <item>עד 20 דקות</item>
+    </string-array>
+    <string-array name="numberOdRooms" />
+    <string-array name="numberOdRoomates" />
+    <string-array name="furniture" />>>
+</resources>

@@ -2,7 +2,6 @@ package com.example.final_project_client.Communication;
 
 import android.content.Context;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,13 +10,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.DTOs.UserSearchDTO;
-import com.example.final_project_client.UserSearchingUtils.SearchResults;
+import com.example.final_project_client.DTOs.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -88,7 +85,7 @@ public class NetworkController implements CommunicationInterface {
                         public void onResponse(String response) {
 
 
-                                SearchResultsDTO searchResultsDTO = new SearchResultsDTO(response);
+                                SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
                                 SearchResults searchResults = new SearchResults(searchResultsDTO);
                                 listener.getResult(searchResults);
                             }

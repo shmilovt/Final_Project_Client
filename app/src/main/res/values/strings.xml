@@ -23,4 +23,19 @@
     <string name="minimal_floor">קומה התחלתית</string>
     <string name="addCategory">הוספה</string>
     <string name="RemoveCategory">הסרה</string>
+    <string name="neighborhood">שכונה</string>
+    <string name="minimal_size">גודל מינימלי</string>
+    <string name="maximal_size">גודל מקסימלי</string>
+    <string name="distanceFromUniversity">מרחק הליכה מהאוניברסיטה</string>
+    <string name="numberOfRooms">מספר חדרים</string>
+    <string name="numberOfRoomates">מספר שותפים</string>
+    <string name="furniture">ריהוט</string>
+    <string name="gardenCheck">גינה/חצר \u2714</string>
+    <string name="balconyCheck">מרפסת \u2714</string>
+    <string name="protectedSpaceCheck">מרחב מוגן \u2714</string>
+    <string name="animalsCheck">חיות \u2714</string>
+    <string name="warehouseCheck">מחסן \u2714</string>
+    <string name="cost">מחיר</string>
+    <string name="floor">קומה</string>
+    <string name="size">גודל דירה</string>
 </resources>

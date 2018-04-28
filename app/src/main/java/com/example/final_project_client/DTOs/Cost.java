@@ -1,4 +1,4 @@
-package com.example.final_project_client.UserSearchingUtils;
+package com.example.final_project_client.DTOs;
 
 public class Cost { // -1 indicate no limit
     private int minCost;

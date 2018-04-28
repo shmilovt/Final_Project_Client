@@ -1,4 +1,4 @@
-package com.example.final_project_client.UserSearchingUtils;
+package com.example.final_project_client.DTOs;
 
 import com.example.final_project_client.DTOs.SearchResultsDTO;
 

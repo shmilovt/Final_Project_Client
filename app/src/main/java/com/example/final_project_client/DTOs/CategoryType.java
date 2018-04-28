@@ -1,8 +1,8 @@
-package com.example.final_project_client.UserSearchingUtils;
+package com.example.final_project_client.DTOs;
 
 public enum CategoryType{
     numRooms,
-    numMates,
+    numRoomates,
     cost,
     floor,
     distanceFromUniversity,

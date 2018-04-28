@@ -1,6 +1,5 @@
 package com.example.final_project_client.Presentation;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,20 +10,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
 import com.example.final_project_client.R;
-import com.example.final_project_client.UserSearchingUtils.CategoryType;
-import com.example.final_project_client.UserSearchingUtils.SearchResults;
+import com.example.final_project_client.DTOs.CategoryType;
+import com.example.final_project_client.DTOs.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -56,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         categoriesPrintNames.put(CategoryType.distanceFromUniversity, "מרחק מהאוניברסיטה (דקות הליכה)");
         categoriesPrintNames.put(CategoryType.furniture, "ריהוט");
         categoriesPrintNames.put(CategoryType.neighborhood, "שכונה");
-        categoriesPrintNames.put(CategoryType.numMates, "מספר שותפים");
+        categoriesPrintNames.put(CategoryType.numRoomates, "מספר שותפים");
         categoriesPrintNames.put(CategoryType.numRooms, "מספר חדרים");
         categoriesPrintNames.put(CategoryType.protectedSpace, "מרחב מוגן");
         categoriesPrintNames.put(CategoryType.warehouse, "מחסן");
@@ -78,12 +74,35 @@ public class SearchActivity extends AppCompatActivity {
             availableCategories = new HashMap<>();
             CostCategoryFragment costCategoryFragment = new CostCategoryFragment();
             FloorCategoryFragment floorCategoryFragment = new FloorCategoryFragment();
+            NeighborhoodCategoryFragment neighborhoodCategoryFragment = new NeighborhoodCategoryFragment();
+            DistanceFromUniversityCategoryFragment distanceFromUniversityCategoryFragment = new DistanceFromUniversityCategoryFragment();
+            SizeCategoryFragment sizeCategoryFragment = new SizeCategoryFragment();
+            NumberOfRoomsCategoryFragment numberOfRoomsCategoryFragment = new NumberOfRoomsCategoryFragment();
+            NumberOfRoomatesCategoryFragment numberOfRoomatesCategoryFragment = new NumberOfRoomatesCategoryFragment();
+            FurnitureCategoryFragment furnitureCategoryFragment = new FurnitureCategoryFragment();
+            GardenCategoryFragment gardenCategoryFragment = new GardenCategoryFragment();
+            ProtectedSpaceCategoryFragment protectedSpaceCategoryFragment = new ProtectedSpaceCategoryFragment();
+            WarehouseCategoryFragment warehouseCategoryFragment = new WarehouseCategoryFragment();
+            BalconyCategoryFragment balconyCategoryFragment = new BalconyCategoryFragment();
+            AnimalsCategoryFragment animalsCategoryFragment = new AnimalsCategoryFragment();
             availableCategories.put(CategoryType.cost, costCategoryFragment);
             availableCategories.put(CategoryType.floor, floorCategoryFragment);
             getFragmentManager().beginTransaction().add(levels[0], costCategoryFragment).commit();
             displayedCategories[0] = CategoryType.cost;
             getFragmentManager().beginTransaction().add(levels[1], floorCategoryFragment).commit();
             displayedCategories[1] = CategoryType.floor;
+            getFragmentManager().beginTransaction().add(levels[2], neighborhoodCategoryFragment).commit();
+            displayedCategories[2] = CategoryType.neighborhood;
+            getFragmentManager().beginTransaction().add(levels[3], distanceFromUniversityCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[4], sizeCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[5], numberOfRoomsCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[6], numberOfRoomatesCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[7], furnitureCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[8], gardenCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[9], warehouseCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[10], protectedSpaceCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[11], animalsCategoryFragment).commit();
+            getFragmentManager().beginTransaction().add(levels[12], balconyCategoryFragment).commit();
             amountOfCategoriesInused = 2;
         }
     }
@@ -204,6 +223,8 @@ public class SearchActivity extends AppCompatActivity {
 
         return builder;
     }
+
+
 
     public AlertDialog.Builder buildDialogProblemConnectingToServer(Context context, String errorString) {
         String message = "היישום אינו מצליח לתקשר עם השרת.";
