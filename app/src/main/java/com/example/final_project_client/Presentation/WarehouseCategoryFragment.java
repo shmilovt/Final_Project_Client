@@ -12,10 +12,11 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 4/29/2018.
  */
 
-public class WarehouseCategoryFragment extends Fragment {
+public class WarehouseCategoryFragment extends CategoryFragment {
     private View mView;
 
     public WarehouseCategoryFragment() {
+        super("מחסן");
     }
 
     @Override

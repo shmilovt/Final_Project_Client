@@ -12,10 +12,11 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 4/28/2018.
  */
 
-public class ProtectedSpaceCategoryFragment extends Fragment {
+public class ProtectedSpaceCategoryFragment extends CategoryFragment {
     private View mView;
 
     public ProtectedSpaceCategoryFragment() {
+        super("מרחב מוגן");
     }
 
     @Override

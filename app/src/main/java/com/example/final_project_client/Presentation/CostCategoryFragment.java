@@ -14,14 +14,19 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 3/22/2018.
  */
 
-public class CostCategoryFragment extends Fragment {
+public class CostCategoryFragment extends CategoryFragment {
     private View mView;
-    private EditText minCost ;
-    private EditText maxCost ;
-    public CostCategoryFragment(){
+    private EditText minCost;
+    private EditText maxCost;
+
+    public CostCategoryFragment() {
+        super("מחיר");
     }
+
     @Override
-    public void onCreate(Bundle savedInstaceState){super.onCreate(savedInstaceState);}
+    public void onCreate(Bundle savedInstaceState) {
+        super.onCreate(savedInstaceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,26 +37,14 @@ public class CostCategoryFragment extends Fragment {
         return mView;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(!minCost.getText().toString().equals(""))
-            outState.putInt("minCost", Integer.parseInt(minCost.getText().toString()));
 
-        if(!maxCost.getText().toString().equals(""))
-        outState.putInt("maxCost" , Integer.parseInt(maxCost.getText().toString()));
+    public String getMinCost() {
+        return minCost.getText().toString();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if(savedInstanceState!=null){
-            Integer minimalCost = savedInstanceState.getInt("minCost");
-            Integer maximalCost = savedInstanceState.getInt("maxCost");
-            if(minimalCost!=null)
-                ( (EditText) mView.findViewById(R.id.editTextMinCost)).setText(minimalCost);
-            if(maximalCost!=null)
-                ( (EditText) mView.findViewById(R.id.editTextMaxCost)).setText(maximalCost);
-        }
+    public String getMaxCost() {
+        return maxCost.getText().toString();
     }
+
+
 }

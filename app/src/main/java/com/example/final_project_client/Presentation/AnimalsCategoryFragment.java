@@ -12,10 +12,11 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 4/28/2018.
  */
 
-public class AnimalsCategoryFragment extends Fragment {
+public class AnimalsCategoryFragment extends CategoryFragment {
     private View mView;
 
     public AnimalsCategoryFragment() {
+        super("חיות");
     }
 
     @Override

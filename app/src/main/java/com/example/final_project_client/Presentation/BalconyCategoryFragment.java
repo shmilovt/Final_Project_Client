@@ -12,10 +12,11 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 4/28/2018.
  */
 
-public class BalconyCategoryFragment extends Fragment {
+public class BalconyCategoryFragment extends CategoryFragment {
     private View mView;
 
     public BalconyCategoryFragment() {
+        super("מרפסת");
     }
 
     @Override

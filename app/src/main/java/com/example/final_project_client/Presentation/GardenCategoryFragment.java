@@ -12,8 +12,13 @@ import com.example.final_project_client.R;
  * Created by TAMIR on 4/29/2018.
  */
 
-public class GardenCategoryFragment extends Fragment {
+public class GardenCategoryFragment extends CategoryFragment{
     private View mView;
+
+    public GardenCategoryFragment() {
+        super("גינה");
+    }
+
     @Override
     public void onCreate(Bundle savedInstaceState){super.onCreate(savedInstaceState);}
 
