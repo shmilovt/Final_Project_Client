@@ -51,12 +51,14 @@ public class ResultsActivity extends AppCompatActivity {
 
             DataHolder.getInstance().setMapViewFragment(mapViewFragment);
             DataHolder.getInstance().setListViewFragment(listViewFragment);
+            DataHolder.getInstance().setOnFirstLaunch(false);
+            System.out.println("first launch");
         }
         else{
             mapViewFragment = DataHolder.getInstance().getMapViewFragment();
             listViewFragment = DataHolder.getInstance().getListViewFragment();
             mapViewFragment.updateData(this);
-
+            System.out.println("not first launch");
 
 
         }

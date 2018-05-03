@@ -9,7 +9,7 @@ import com.example.final_project_client.UserSearchingUtils.ResultRecord;
 public class DataHolder {
     private ResultRecord [] resultRecords;
     private int index;
-    private int resultsActivityNumOfCreations;
+
     private MapViewFragment mapViewFragment;
     private ListViewFragment listViewFragment;
     private boolean onFirstLaunch;
@@ -19,7 +19,6 @@ public class DataHolder {
     private DataHolder(){
         resultRecords = new ResultRecord[0];
         index = 0;
-        resultsActivityNumOfCreations = 0;
         onFirstLaunch = true;
     }
 
@@ -51,13 +50,6 @@ public class DataHolder {
         return index;
     }
 
-    public int getResultsActivityNumOfCreations() {
-        return resultsActivityNumOfCreations;
-    }
-
-    public void incrementResultsActivityNumOfCreations() {
-       resultsActivityNumOfCreations++;
-    }
 
     public MapViewFragment getMapViewFragment() {
         return mapViewFragment;
