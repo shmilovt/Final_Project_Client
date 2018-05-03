@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 3/22/2018.
@@ -39,6 +40,10 @@ public class FloorCategoryFragment extends CategoryFragment {
 
     public String getMaxFloor() {
         return maxFloor.getText().toString();
+    }
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
     }
 
 }

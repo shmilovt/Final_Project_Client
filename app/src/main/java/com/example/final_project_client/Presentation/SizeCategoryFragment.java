@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 4/28/2018.
@@ -33,11 +34,16 @@ public class SizeCategoryFragment extends CategoryFragment {
     }
 
 
-    public String getMinCost() {
+    public String getMinSize() {
         return minSize.getText().toString();
     }
 
-    public String getMaxCost() {
+    public String getMaxSize() {
         return maxSize.getText().toString();
+    }
+
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
     }
 }

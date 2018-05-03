@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 3/22/2018.
@@ -45,6 +46,9 @@ public class CostCategoryFragment extends CategoryFragment {
     public String getMaxCost() {
         return maxCost.getText().toString();
     }
-
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
+    }
 
 }

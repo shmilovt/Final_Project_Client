@@ -3,25 +3,14 @@
     <string-array name="array_neighborhoodNames" >
         <item>לא נבחר</item>
         <item>רמות</item>
-        <item>שכונה א</item>
-        <item>שכונה ב</item>
-        <item>שכונה ג</item>
-        <item>שכונה ד</item>
-        <item>שכונה ה</item>
-        <item>שכונה ו החדשה</item>
-        <item>שכונה ט</item>
+        <item>שכונה א'</item>
+        <item>שכונה ב'</item>
+        <item>שכונה ג'</item>
+        <item>שכונה ד'</item>
+        <item>שכונה ה'</item>
+        <item>שכונה ו'</item>
+        <item>שכונה ט'</item>
         <item>שכונה יא</item>
-        <item>העיר העתיקה</item>
-        <item>שכונת דרום</item>
-        <item>שיכון דרום</item>
-        <item>המרכז האזרחי</item>
-        <item>נאות אלון</item>
-        <item>נווה זאב</item>
-        <item>נווה נוי</item>
-        <item>נחל בקע</item>
-        <item>נחל עשן</item>
-        <item>נווה מנחם</item>
-        <item>הסיגליות</item>
     </string-array>
 
     <string-array name="distanceFromUniversity" >
@@ -31,7 +20,30 @@
         <item>עד 15 דקות</item>
         <item>עד 20 דקות</item>
     </string-array>
-    <string-array name="numberOdRooms" />
-    <string-array name="numberOdRoomates" />
-    <string-array name="furniture" />>>
+    <string-array name="numberOdRooms" >
+        <item>לא נבחר</item>
+        <item>דירת יחיד</item>
+        <item>2 חדרים</item>
+        <item>3 חדרים</item>
+        <item>4 חדרים</item>
+        <item>5 חדרים</item>
+        <item>6 חדרים ומעלה</item>
+   </string-array>
+    <string-array name="numberOdRoomates" >
+        <item>לא נבחר</item>
+        <item>ללא שותפים</item>
+        <item>זוג</item>
+        <item>2 שותפים</item>
+        <item>3 שותפים</item>
+        <item>3 שותפים</item>
+        <item>4 שותפים</item>
+        <item>5 שותפים ומעלה</item>
+    </string-array>
+    <string-array name="furniture" >
+        <item>לא נבחר</item>
+        <item>ריהוט מלא</item>
+        <item>ריהוט חלקי</item>
+        <item>ללא ריהוט</item>
+    </string-array>
+    >>
 </resources>

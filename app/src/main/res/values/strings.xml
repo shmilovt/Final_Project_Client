@@ -35,7 +35,7 @@
     <string name="protectedSpaceCheck">מרחב מוגן \u2714</string>
     <string name="animalsCheck">חיות \u2714</string>
     <string name="warehouseCheck">מחסן \u2714</string>
-    <string name="cost">מחיר</string>
-    <string name="floor">קומה</string>
-    <string name="size">גודל דירה</string>
+    <string name="costDTO">מחיר</string>
+    <string name="floorDTO">קומה</string>
+    <string name="sizeDTO">גודל דירה</string>
 </resources>

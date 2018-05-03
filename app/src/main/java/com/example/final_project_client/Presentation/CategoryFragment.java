@@ -2,6 +2,8 @@ package com.example.final_project_client.Presentation;
 
 import android.app.Fragment;
 
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
+
 /**
  * Created by TAMIR on 4/29/2018.
  */
@@ -34,4 +36,6 @@ public abstract class CategoryFragment extends Fragment{
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
+    public abstract void addToUserSearch(UserSearch userSearch);
 }

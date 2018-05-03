@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 4/27/2018.
@@ -36,5 +37,10 @@ public class NeighborhoodCategoryFragment extends CategoryFragment {
 
     public String getSelectedItem(){
         return spinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
     }
 }

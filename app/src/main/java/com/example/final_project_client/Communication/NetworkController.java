@@ -10,7 +10,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.DTOs.UserSearchDTO;
-import com.example.final_project_client.DTOs.SearchResults;
+import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class NetworkController implements CommunicationInterface {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println("no network");
+
 
                     }
                 }
@@ -77,14 +77,15 @@ public class NetworkController implements CommunicationInterface {
         if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
             String fullURL = URL + "/searchApartments";
             UserSearchDTO userSearchDTO = new UserSearchDTO(userSearch);
-            final String jsonString = userSearchDTO.toJson();
+            final String jsonString = UserSearchDTO.toJSON(userSearchDTO);
+            System.out.println(jsonString);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, fullURL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
-
+                                System.out.println(response);
                                 SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
                                 SearchResults searchResults = new SearchResults(searchResultsDTO);
                                 listener.getResult(searchResults);

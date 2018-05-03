@@ -1,10 +1,12 @@
-package com.example.final_project_client.DTOs;
+package com.example.final_project_client.UserSearchingUtils;
+
+import com.example.final_project_client.DTOs.ResultRecordDTO;
 
 /**
- * Created by TAMIR on 4/27/2018.
+ * Created by TAMIR on 4/29/2018.
  */
 
-public class ResultRecordDTO {
+public class ResultRecord {
     private String street;
     private int number;
     private String neighborhood;
@@ -22,11 +24,36 @@ public class ResultRecordDTO {
     private int numberOfRoomates;
     private String dateOfPublish; //just date without time
     private String text;
-    private ContactDTO [] contacts;
+    private Contact [] contacts;
     private double lat; // קווי אורך
     private double lon; // קווי רוחב
 
-    public ResultRecordDTO(){}
+    public ResultRecord(ResultRecordDTO resultRecordDTO) {
+        street = resultRecordDTO.getStreet();
+        number = resultRecordDTO.getNumber();
+        neighborhood = resultRecordDTO.getNeighborhood();
+        floor = resultRecordDTO.getFloor();
+        distanceFromUniversity = resultRecordDTO.getDistanceFromUniversity();
+        cost = resultRecordDTO.getCost();
+        size = resultRecordDTO.getSize();
+        balcony = resultRecordDTO.isBalcony();
+        yard = resultRecordDTO.isYard();
+        animals = resultRecordDTO.isAnimals();
+        warehouse = resultRecordDTO.isWarehouse();
+        protectedSpace = resultRecordDTO.isProtectedSpace();
+        furniture = resultRecordDTO.getFurniture();
+        numberOfRooms = resultRecordDTO.getNumberOfRooms();
+        numberOfRoomates = resultRecordDTO.getNumberOfRoomates();
+        dateOfPublish = resultRecordDTO.getDateOfPublish();
+        text = resultRecordDTO.getText();
+        int size = resultRecordDTO.getContacts().length;
+        contacts = new Contact[size];
+        for(int i=0; i<size; i++){
+            contacts[i] = new Contact(resultRecordDTO.getContacts()[i]);
+        }
+        lat = resultRecordDTO.getLat();
+        lon = resultRecordDTO.getLon();
+    }
 
     public String getStreet() {
         return street;
@@ -64,7 +91,7 @@ public class ResultRecordDTO {
         return distanceFromUniversity;
     }
 
-    public void setDistanceFromUniversity(int distanceFromUniversity) {
+    public void setDistanceFromUniversity(double distanceFromUniversity) {
         this.distanceFromUniversity = distanceFromUniversity;
     }
 
@@ -164,11 +191,11 @@ public class ResultRecordDTO {
         this.text = text;
     }
 
-    public ContactDTO[] getContacts() {
+    public Contact[] getContacts() {
         return contacts;
     }
 
-    public void setContacts(ContactDTO[] contacts) {
+    public void setContacts(Contact[] contacts) {
         this.contacts = contacts;
     }
 

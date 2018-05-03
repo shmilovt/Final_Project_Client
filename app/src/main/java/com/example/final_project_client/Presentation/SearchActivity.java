@@ -1,32 +1,28 @@
 package com.example.final_project_client.Presentation;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.util.ULocale;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
 import com.example.final_project_client.R;
-import com.example.final_project_client.DTOs.CategoryType;
-import com.example.final_project_client.DTOs.SearchResults;
+import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 import com.google.gson.Gson;
-
-import java.util.HashMap;
 
 
 public class SearchActivity extends AppCompatActivity {
 
     private CategoriesManager categoriesManager;
+    private ScrollView scrollView;
     public static final String SEARCH_REASULTS = "com.example.final_project_client.SEARCH_RESULTS";
 
 
@@ -38,10 +34,15 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         NetworkController.getInstance(this);
         setContentView(R.layout.activity_search);
+        scrollView = findViewById(R.id.scrollView);
+
+        categoriesManager.displayCategory(new NeighborhoodCategoryFragment());
+        categoriesManager.displayCategory(new CostCategoryFragment());
+
 
 
     }
@@ -52,13 +53,16 @@ public class SearchActivity extends AppCompatActivity {
         if (!hasNetwork()) {
             buildDialogNotNetwork(SearchActivity.this).show();
         } else {
-            UserSearch userSearch = new UserSearch();
+            UserSearch userSearch = categoriesManager.convertToUserSearch();
             NetworkController.getInstance(this).searchApartments(userSearch, new NetworkListener<SearchResults>() {
                 @Override
                 public void getResult(SearchResults searchResults) {
-                    System.out.println((new Gson()).toJson(searchResults));
+
                     Intent intent = new Intent(searchActivity, ResultsActivity.class);
-                    intent.putExtra(SEARCH_REASULTS, (new Gson()).toJson(searchResults));
+                    //intent.putExtra(SEARCH_REASULTS, (new Gson()).toJson(searchResults));
+                    DataHolder.getInstance().setIndex(0);
+                    DataHolder.getInstance().setResultRecords(searchResults.getResultRecords());
+                    DataHolder.getInstance().setOnFirstLaunch(true);
                     startActivity(intent);
                 }
             }, new NetworkListener<String>() {
@@ -111,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
                 .setItems(unusedCategories, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        categoriesManager.addCategory(which);
+                        categoriesManager.displayCategory(which);
                     }
                 }).setNegativeButton("סגור", new DialogInterface.OnClickListener() {
             @Override
@@ -185,19 +189,20 @@ public class SearchActivity extends AppCompatActivity {
         WarehouseCategoryFragment warehouseCategoryFragment = new WarehouseCategoryFragment();
         BalconyCategoryFragment balconyCategoryFragment = new BalconyCategoryFragment();
         AnimalsCategoryFragment animalsCategoryFragment = new AnimalsCategoryFragment();
-        manager.addCategory(costCategoryFragment);
-        manager.addCategory(floorCategoryFragment);
         manager.addCategory(neighborhoodCategoryFragment);
+        manager.addCategory(costCategoryFragment);
         manager.addCategory(distanceFromUniversityCategoryFragment);
+        manager.addCategory(numberOfRoomatesCategoryFragment);
+        manager.addCategory(floorCategoryFragment);
         manager.addCategory(sizeCategoryFragment);
         manager.addCategory(numberOfRoomsCategoryFragment);
-        manager.addCategory(numberOfRoomatesCategoryFragment);
         manager.addCategory(furnitureCategoryFragment);
         manager.addCategory(gardenCategoryFragment);
         manager.addCategory(protectedSpaceCategoryFragment);
         manager.addCategory(warehouseCategoryFragment);
         manager.addCategory(balconyCategoryFragment);
         manager.addCategory(animalsCategoryFragment);
+
     }
 }
 

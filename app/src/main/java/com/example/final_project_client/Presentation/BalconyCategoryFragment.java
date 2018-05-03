@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 4/28/2018.
@@ -29,5 +30,10 @@ public class BalconyCategoryFragment extends CategoryFragment {
 
         mView = inflater.inflate(R.layout.fragment_balcony_category, container, false);
         return mView;
+    }
+
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
     }
 }

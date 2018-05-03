@@ -1,6 +1,8 @@
 package com.example.final_project_client.Presentation;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +14,29 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapViewFragment extends Fragment implements OnMapReadyCallback {
+import java.util.List;
+
+public class MapViewFragment extends Fragment implements OnMapReadyCallback, ResultsView {
 
     private MapView gMapView;
     private GoogleMap mMap;
     private View mView;
+    private Marker[] markers;
 
 
-    public MapViewFragment(){
+    public MapViewFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstaceState) {
+        super.onCreate(savedInstaceState);
+
 
     }
-    @Override
-    public void onCreate(Bundle savedInstaceState){super.onCreate(savedInstaceState);}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,16 +46,17 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        gMapView = (MapView)mView.findViewById(R.id.map);
-        if(gMapView != null){
+        gMapView = (MapView) mView.findViewById(R.id.map);
+        if (gMapView != null) {
             gMapView.onCreate(null);
             gMapView.onResume();
             gMapView.getMapAsync(this);
         }
     }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -57,33 +69,49 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                //mMap.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+                int i=0;
+                for(Marker mark : markers ){
+                    if(mark.equals(marker)){
+                        break;
+                    }
+                    i++;
+                }
+                ((ResultsActivity)getActivity()).openApartmentFullDescription(i);
+                return true;
+            }
+        });
 
-        // Add a marker in Sydney and move the camera
-        LatLng BeerSheva1 = new LatLng(31.261129, 34.798384);
-        LatLng BeerSheva2 = new LatLng(31.263432, 34.794884);
-        LatLng BeerSheva3 = new LatLng(31.262129, 34.797384);
-        LatLng BeerSheva4 = new LatLng(31.256561, 34.794576);
-        LatLng BeerSheva5 = new LatLng(31.270088, 34.779584);
-        LatLng BeerSheva6 = new LatLng(31.280991, 34.799228);
-        LatLng BeerSheva7 = new LatLng(31.263732, 34.794841);
-
+        ((ResultsActivity)getActivity()).getData(this);
         LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
-
-
-        mMap.addMarker(new MarkerOptions().position(BeerSheva1));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva2));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva3));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva4));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva5));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva6));
-        mMap.addMarker(new MarkerOptions().position(BeerSheva7).title("אלכסנדר ינאי 17").snippet("קומה: 5" + "\n" +
-                "מספר שותפים: 2" +"\n"+
-                "מחיר: 2900"));
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(BeershebaCenter));
         mMap.setMinZoomPreference(12.9f);
     }
 
 
+    @Override
+    public void updateData(ResultsActivity resultsActivity) {
+        List<Coordinate> coordinateList = resultsActivity.getCoordinates();
+        if(markers!=null){
+            for(Marker marker : markers){
+                if(marker!=null)
+                    marker.remove();
+            }
+        }
+        markers = new Marker[coordinateList.size()];
+        for (int i = 0; i < markers.length; i++){
+            Coordinate coordinate = coordinateList.get(i);
+            LatLng  latLng = new LatLng(coordinate.getLat(), coordinate.getLon());
+            MarkerOptions markerOption = new MarkerOptions();
+            markerOption.position(latLng);
+            Marker marker =mMap.addMarker(markerOption);
+            markers[i] = marker;
+        }
 
+
+
+    }
 }

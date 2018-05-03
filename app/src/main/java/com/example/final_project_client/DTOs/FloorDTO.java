@@ -1,13 +1,22 @@
 package com.example.final_project_client.DTOs;
 
-public class Floor {
+import com.example.final_project_client.UserSearchingUtils.Floor;
+
+public class FloorDTO {
     private int minFloor;
     private int maxFloor;
 
-    public Floor(){}
-    public Floor(int minFloor, int maxFloor){
+    public FloorDTO(){}
+    public FloorDTO(int minFloor, int maxFloor){
         this.minFloor = minFloor;
         this.maxFloor = maxFloor;
+    }
+
+    public FloorDTO(Floor floor) {
+        if(floor!=null){
+        minFloor = floor.getMinFloor();
+        maxFloor = floor.getMaxFloor();
+        }
     }
 
     public int getMinFloor() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -85,7 +86,7 @@ public class CategoriesManager {
 
     }
 
-    public void addCategory(int categoryIndex){
+    public void displayCategory(int categoryIndex){
         CategoryFragment choosenCategory = notDisplayedCategories.get(categoryIndex);
            numOfDisplayedCategories++;
            notDisplayedCategories.remove(choosenCategory);
@@ -94,6 +95,33 @@ public class CategoriesManager {
            ((Activity)context).getFragmentManager().beginTransaction().add(levels[numOfDisplayedCategories-1], choosenCategory).commit();
 
 
+    }
+
+
+    public void displayCategory(CategoryFragment categoryFragment){
+        CategoryFragment choosenCategory = null;
+        for(CategoryFragment categoryFragment1: notDisplayedCategories){
+            if(categoryFragment1.getName().equals(categoryFragment.getName()))
+                choosenCategory = categoryFragment1;
+        }
+
+        numOfDisplayedCategories++;
+        notDisplayedCategories.remove(choosenCategory);
+        displayedCategories.add(choosenCategory);
+        choosenCategory.setPriority(numOfDisplayedCategories);
+        ((Activity)context).getFragmentManager().beginTransaction().add(levels[numOfDisplayedCategories-1], choosenCategory).commit();
+
+
+    }
+
+
+    public UserSearch convertToUserSearch(){
+        UserSearch userSearch = new UserSearch();
+        for (CategoryFragment categoryFragment: displayedCategories){
+           categoryFragment.addToUserSearch(userSearch);
+        }
+        System.out.println(userSearch);
+        return userSearch;
     }
 
 

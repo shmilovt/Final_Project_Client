@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 
 import com.example.final_project_client.R;
+import com.example.final_project_client.UserSearchingUtils.UserSearch;
 
 /**
  * Created by TAMIR on 4/28/2018.
@@ -16,6 +17,8 @@ import com.example.final_project_client.R;
 public class DistanceFromUniversityCategoryFragment extends CategoryFragment{
     private View mView;
     private Spinner spinner;
+    private String [] options;
+
 
     public DistanceFromUniversityCategoryFragment(){
         super("מרחק מאוניברסיטה (דקות הליכה)");
@@ -28,6 +31,7 @@ public class DistanceFromUniversityCategoryFragment extends CategoryFragment{
 
         mView = inflater.inflate(R.layout.fragment_distance_category, container, false);
         spinner = (Spinner) mView.findViewById(R.id.spinnerDistanceFromUniversity);
+        options = getResources().getStringArray(R.array.distanceFromUniversity);
 
         return mView;
     }
@@ -35,5 +39,10 @@ public class DistanceFromUniversityCategoryFragment extends CategoryFragment{
 
     public String getSelectedItem(){
         return spinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public void addToUserSearch(UserSearch userSearch) {
+        userSearch.addCategory(this);
     }
 }

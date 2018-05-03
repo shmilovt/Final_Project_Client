@@ -3,52 +3,62 @@ package com.example.final_project_client.DTOs;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 import com.google.gson.Gson;
 
+
 public class UserSearchDTO {
 
     private CategoryType[] priorities;
     private String neighborhood;
-    private DistanceFromUniversity distanceFromUniversity;
-    private Floor floor;
-    private Cost cost;
-    private Size size;
-    private Furniture furniture;
-    private double numberOfRooms;
-    private NumberOfRoomates numberOfMates;
-    private boolean balcony;
-    private boolean animals;
-    private boolean protectedSpace;
-    private boolean yard;
-    private boolean warehouse;
+    private int distanceFromUniversity;
+    private FloorDTO floorDTO;
+    private CostDTO costDTO;
+    private SizeDTO sizeDTO;
+    private int furniture;
+    private int numberOfRooms;
+    private int numberOfMates;
 
-    public UserSearchDTO(){}
+
+    public UserSearchDTO(){
+        priorities = new CategoryType[0];
+        neighborhood="";
+        distanceFromUniversity=-1;
+        floorDTO = new FloorDTO(-1, -1);
+        costDTO = new CostDTO(-1, -1);
+        sizeDTO = new SizeDTO(-1, -1);
+        furniture =  -1;
+        numberOfRooms = -1;
+        numberOfMates = -1;
+
+    }
     public UserSearchDTO(UserSearch userSearch){
         priorities = userSearch.getPriorities();
         neighborhood = userSearch.getNeighborhood();
-        distanceFromUniversity = userSearch.getDistanceFromUniversity();
-        floor = userSearch.getFloor();
-        cost = userSearch.getCost();
-        furniture = userSearch.getFurniture();
-        numberOfRooms = userSearch.getNumberOfRooms();
-        numberOfMates = userSearch.getNumberOfMates();
-        balcony = userSearch.isBalcony();
-        animals =  userSearch.isAnimals();
-        protectedSpace = userSearch.isProtectedSpace();
-        yard = userSearch.isYard();
-        warehouse = userSearch.isWarehouse();
-        size = userSearch.getSize();
+        distanceFromUniversity = userSearch.getDistanceFromUniversity().getValue();
+        floorDTO = new FloorDTO(userSearch.getFloor());
+        costDTO = new CostDTO(userSearch.getCost());
+        sizeDTO = new SizeDTO(userSearch.getSize());
+        furniture = userSearch.getFurniture().getValue();
+        numberOfRooms = userSearch.getNumberOfRooms().getValue();
+        numberOfMates = userSearch.getNumberOfMates().getValue();
     }
 
 
 
-    public String toJson() {
+    public static String toJSON(UserSearchDTO userSearchDTO) {
         Gson gson = new Gson();
-        return gson.toJson(this);
+        return gson.toJson(userSearchDTO);
     }
+
+    public static UserSearchDTO fromJSON(String userSearchDTOString){
+        Gson gson = new Gson();
+        UserSearchDTO userSearchDTO = gson.fromJson(userSearchDTOString, UserSearchDTO.class);
+        return userSearchDTO;
+
+    }
+
 
     public CategoryType[] getPriorities() {
         return priorities;
     }
-
 
     public void setPriorities(CategoryType[] priorities) {
         this.priorities = priorities;
@@ -62,99 +72,59 @@ public class UserSearchDTO {
         this.neighborhood = neighborhood;
     }
 
-    public DistanceFromUniversity getDistanceFromUniversity() {
+    public int getDistanceFromUniversity() {
         return distanceFromUniversity;
     }
 
-    public void setDistanceFromUniversity(DistanceFromUniversity distanceFromUniversity) {
+    public void setDistanceFromUniversity(int distanceFromUniversity) {
         this.distanceFromUniversity = distanceFromUniversity;
     }
 
-    public Floor getFloor() {
-        return floor;
+    public FloorDTO getFloorDTO() {
+        return floorDTO;
     }
 
-    public void setFloor(Floor floor) {
-        this.floor = floor;
+    public void setFloorDTO(FloorDTO floorDTO) {
+        this.floorDTO = floorDTO;
     }
 
-    public Cost getCost() {
-        return cost;
+    public CostDTO getCostDTO() {
+        return costDTO;
     }
 
-    public void setCost(Cost cost) {
-        this.cost = cost;
+    public void setCostDTO(CostDTO costDTO) {
+        this.costDTO = costDTO;
     }
 
-    public Size getSize() {
-        return size;
+    public SizeDTO getSizeDTO() {
+        return sizeDTO;
     }
 
-    public void setSize(Size size) {
-        this.size = size;
+    public void setSizeDTO(SizeDTO sizeDTO) {
+        this.sizeDTO = sizeDTO;
     }
 
-    public Furniture getFurniture() {
+    public int getFurniture() {
         return furniture;
     }
 
-    public void setFurniture(Furniture furniture) {
+    public void setFurniture(int furniture) {
         this.furniture = furniture;
     }
 
-    public double getNumberOfRooms() {
+    public int getNumberOfRooms() {
         return numberOfRooms;
     }
 
-    public void setNumberOfRooms(double numberOfRooms) {
+    public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
 
-    public NumberOfRoomates getNumberOfMates() {
+    public int getNumberOfMates() {
         return numberOfMates;
     }
 
-    public void setNumberOfMates(NumberOfRoomates numberOfMates) {
+    public void setNumberOfMates(int numberOfMates) {
         this.numberOfMates = numberOfMates;
-    }
-
-    public boolean isBalcony() {
-        return balcony;
-    }
-
-    public void setBalcony(boolean balcony) {
-        this.balcony = balcony;
-    }
-
-    public boolean isAnimals() {
-        return animals;
-    }
-
-    public void setAnimals(boolean animals) {
-        this.animals = animals;
-    }
-
-    public boolean isProtectedSpace() {
-        return protectedSpace;
-    }
-
-    public void setProtectedSpace(boolean protectedSpace) {
-        this.protectedSpace = protectedSpace;
-    }
-
-    public boolean isYard() {
-        return yard;
-    }
-
-    public void setYard(boolean yard) {
-        this.yard = yard;
-    }
-
-    public boolean isWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(boolean warehouse) {
-        this.warehouse = warehouse;
     }
 }

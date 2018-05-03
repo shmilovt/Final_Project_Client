@@ -28,6 +28,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Presentation.ApartmentFullDescriptionActivity" android:parentActivityName=".Presentation.ResultsActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden" android:focusable="true" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Presentation.ResultsActivity" />
+        </activity>
         <activity android:name=".Presentation.ResultsActivity" android:parentActivityName=".Presentation.SearchActivity"
             android:screenOrientation="portrait">
             <meta-data
