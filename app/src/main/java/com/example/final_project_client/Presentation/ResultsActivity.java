@@ -33,7 +33,6 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     public ResultsActivity(){
-        index = 0;
     }
 
     @Override
@@ -59,21 +58,17 @@ public class ResultsActivity extends AppCompatActivity {
             listViewFragment = DataHolder.getInstance().getListViewFragment();
             mapViewFragment.updateData(this);
             System.out.println("not first launch");
-
-
         }
         btnMode = findViewById(R.id.BtnMode);
         btnRecentlyResults = findViewById(R.id.BtnRecentlyResults);
         btnNextResults = findViewById(R.id.BtnNextResults);
 
+
         if (index == 0)
             btnRecentlyResults.setEnabled(false);
 
-        mapViewFragment.setArguments(getIntent().getExtras());
-        getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, mapViewFragment).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_container, mapViewFragment).commit();
         btnMode.setText(getString(R.string.record_mode));
-
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,40 +82,19 @@ public class ResultsActivity extends AppCompatActivity {
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, listViewFragment);
                     transaction.commit();
+
                 }
             }
         });
     }
 
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        Gson gson = new Gson();
-        index = savedInstanceState.getInt("index");
-        String resultRecordsJson = savedInstanceState.getString("resultRecords");
-        resultRecords = gson.fromJson(resultRecordsJson, ResultRecord[].class);
-        System.out.println("restore state...");
 
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        super.onSaveInstanceState(outState);
-        Gson gson = new Gson();
-      outState.putInt("index", index);
-      String resultRecordsJson =  gson.toJson(resultRecords);
-      outState.putString("resultRecords", resultRecordsJson);
-
-
-
-
-    }
 
     public synchronized void nextResults(View view) {
         if(index+MaxDisplay<resultRecords.length){
             index = index+MaxDisplay;
             mapViewFragment.updateData(this);
+            listViewFragment.updateData(this);
 
             if(index+MaxDisplay>=resultRecords.length){
                 btnNextResults.setEnabled(false);
@@ -137,6 +111,7 @@ public class ResultsActivity extends AppCompatActivity {
         if(index-MaxDisplay>=0){
             index = index-MaxDisplay;
             mapViewFragment.updateData(this);
+            listViewFragment.updateData(this);
 
             if(index-MaxDisplay<0){
                 btnRecentlyResults.setEnabled(false);
@@ -158,6 +133,18 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         return coordinates;
+    }
+
+
+    public List<ApartmentBriefDescription>  getApartmentBriefDescriptions() {
+        List<ApartmentBriefDescription> apartmentBriefDescriptions = new ArrayList<>();
+        for(int i=index; i<index+MaxDisplay && i<resultRecords.length; i++){
+            ResultRecord resultRecord = resultRecords[i];
+            ApartmentBriefDescription apartmentBriefDescription = new ApartmentBriefDescription(resultRecord.getCost(), resultRecord.getNeighborhood(), resultRecord.getStreet(), resultRecord.getNumber(), resultRecord.getNumberOfRooms(), resultRecord.getNumberOfRoomates());
+            apartmentBriefDescriptions.add(apartmentBriefDescription);
+        }
+
+        return apartmentBriefDescriptions;
     }
 
     public void getData(ResultsView mapViewFragment) {

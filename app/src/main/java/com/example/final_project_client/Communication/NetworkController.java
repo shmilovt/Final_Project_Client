@@ -12,6 +12,7 @@ import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.DTOs.UserSearchDTO;
 import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,10 +85,11 @@ public class NetworkController implements CommunicationInterface {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-
-                                System.out.println(response);
                                 SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
                                 SearchResults searchResults = new SearchResults(searchResultsDTO);
+                                Gson gson = new Gson();
+                                String strResults = gson.toJson(searchResults);
+                                System.out.println(strResults);
                                 listener.getResult(searchResults);
                             }
 

@@ -38,4 +38,9 @@
     <string name="costDTO">מחיר</string>
     <string name="floorDTO">קומה</string>
     <string name="sizeDTO">גודל דירה</string>
+    <string name="cost">מחיר:</string>
+    <string name="address">כתובת:</string>
+    <string name="rooms">חדרים:</string>
+    <string name="amountOfRoomates">כמות שותפים:</string>
+    <string name="roomates">שותפים:</string>
 </resources>

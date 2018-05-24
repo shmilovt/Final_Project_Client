@@ -13,10 +13,15 @@ import android.widget.ScrollView;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
+import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.R;
 import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 import com.google.gson.Gson;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -54,10 +59,9 @@ public class SearchActivity extends AppCompatActivity {
             buildDialogNotNetwork(SearchActivity.this).show();
         } else {
             UserSearch userSearch = categoriesManager.convertToUserSearch();
-            NetworkController.getInstance(this).searchApartments(userSearch, new NetworkListener<SearchResults>() {
+           NetworkController.getInstance(this).searchApartments(userSearch, new NetworkListener<SearchResults>() {
                 @Override
                 public void getResult(SearchResults searchResults) {
-
                     Intent intent = new Intent(searchActivity, ResultsActivity.class);
                     //intent.putExtra(SEARCH_REASULTS, (new Gson()).toJson(searchResults));
                     DataHolder.getInstance().setIndex(0);
@@ -71,6 +75,21 @@ public class SearchActivity extends AppCompatActivity {
                     buildDialogProblemConnectingToServer(SearchActivity.this, errorString).show();
                 }
             });
+
+
+
+
+        /*    String jsonString =
+            "{\"resultRecordDTOS\":[{\"street\":\"אלעזר בן יאיר\",\"number\":16,\"neighborhood\":\"שכונה ד\u0027\",\"floor\":-2,\"distanceFromUniversity\":18.0,\"cost\":1150,\"size\":-1,\"balcony\":false,\"yard\":true,\"animals\":false,\"warehouse\":false,\"protectedSpace\":false,\"furniture\":2,\"numberOfRooms\":4.0,\"numberOfRoomates\":3,\"dateOfPublish\":\"Tue May 01 05:38:46 IDT 2018\",\"text\":\"השותפה המקסימה שלנו Yarden Peretz עוזבת את הדירה. אני וGal Ben Maman מחפשים מישהי שתחליף את מקומה בחדר. דירת 4 חדרים חדשה משופצת לחלוטין עם חצר ענקית. הדירה באלעזר בן יאיר 16 כרבע שעה מאוניברסיטה. הדירה מרוהטת ויש בה הכל, רק להביא בגדים ולהכנס. עלות 1150 ש\\\"ח. כניסה מיידית :)\\nלפרטים:\\n0526516656\\n\",\"contacts\":[{\"name\":\"\",\"phone\":\"0526516656\"}],\"lat\":31.2628471,\"lon\":34.7904706}, "+
+            "{\"street\":\"בצלאל\",\"number\":20,\"neighborhood\":\"שכונה ב\u0027\",\"floor\":-2,\"distanceFromUniversity\":26.0,\"cost\":2150,\"size\":-1,\"balcony\":false,\"yard\":true,\"animals\":false,\"warehouse\":false,\"protectedSpace\":false,\"furniture\":2,\"numberOfRooms\":2.0,\"numberOfRoomates\":0,\"dateOfPublish\":\"Tue May 01 05:38:49 IDT 2018\",\"text\":\"יחידת דיור 2 חדרים להשכרה בשכונה ב\u0027 רחוב בצלאל 20 חמש דקות הליכה למכללת סמי שמעון וקרובה מאוד למרכז חן. היחידה מרוהטת. 2150 כולל מים וארנונה וחשמל עד 150 שח לחודש. לכניסה מיידית .\n\",\"contacts\":[],\"lat\":31.2539624,\"lon\":34.7886863}]}";
+            System.out.println(jsonString);
+            SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(jsonString);
+            SearchResults searchResults = new SearchResults(searchResultsDTO);
+            Intent intent = new Intent(searchActivity, ResultsActivity.class);
+            DataHolder.getInstance().setIndex(0);
+            DataHolder.getInstance().setResultRecords(searchResults.getResultRecords());
+            DataHolder.getInstance().setOnFirstLaunch(true);
+            startActivity(intent);*/
         }
     }
 
