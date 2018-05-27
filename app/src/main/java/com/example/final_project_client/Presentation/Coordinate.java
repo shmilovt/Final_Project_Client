@@ -29,4 +29,16 @@ public class Coordinate {
     public void setLon(double lon) {
         this.lon = lon;
     }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Coordinate)) return false;
+        Coordinate otherCoordinate = (Coordinate) other;
+        if (otherCoordinate.getLat() == lat && otherCoordinate.getLon() == lon)
+            return true;
+        return false;
+    }
 }

@@ -2,6 +2,7 @@ package com.example.final_project_client.Presentation;
 
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,7 @@ public class ResultsActivity extends AppCompatActivity {
     private Button btnNextResults;
     private ResultRecord [] resultRecords;
     private int index;
+    private int mode;
 
 
 
@@ -44,16 +46,18 @@ public class ResultsActivity extends AppCompatActivity {
         resultRecords = DataHolder.getInstance().getResultRecords();
 
         if(DataHolder.getInstance().isOnFirstLaunch()) {
-
+            mode =0;
             mapViewFragment = new MapViewFragment();
             listViewFragment = new ListViewFragment();
 
             DataHolder.getInstance().setMapViewFragment(mapViewFragment);
             DataHolder.getInstance().setListViewFragment(listViewFragment);
+            DataHolder.getInstance().setMode(mode);
             DataHolder.getInstance().setOnFirstLaunch(false);
             System.out.println("first launch");
         }
         else{
+            mode = DataHolder.getInstance().getMode();
             mapViewFragment = DataHolder.getInstance().getMapViewFragment();
             listViewFragment = DataHolder.getInstance().getListViewFragment();
             mapViewFragment.updateData(this);
@@ -66,19 +70,33 @@ public class ResultsActivity extends AppCompatActivity {
 
         if (index == 0)
             btnRecentlyResults.setEnabled(false);
+        if(index+MaxDisplay>=resultRecords.length){
+            btnNextResults.setEnabled(false);
+        }
 
-        getFragmentManager().beginTransaction().add(R.id.fragment_container, mapViewFragment).commit();
-        btnMode.setText(getString(R.string.record_mode));
+        if(mode == 0){
+            getFragmentManager().beginTransaction().add(R.id.fragment_container, mapViewFragment).commit();
+            btnMode.setText(getString(R.string.record_mode));
+        }
+        else{
+            getFragmentManager().beginTransaction().add(R.id.fragment_container, listViewFragment).commit();
+            btnMode.setText(getString(R.string.map_mode));
+        }
+
+
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (btnMode.getText().equals(getString(R.string.map_mode))) {
                     btnMode.setText(getString(R.string.record_mode));
+                    mode = 0;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, mapViewFragment);
                     transaction.commit();
+
                 } else {
                     btnMode.setText(getString(R.string.map_mode));
+                    mode = 1;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, listViewFragment);
                     transaction.commit();
@@ -135,6 +153,12 @@ public class ResultsActivity extends AppCompatActivity {
         return coordinates;
     }
 
+    public ApartmentBriefDescription getApartmentBriefDescription(int position){
+        ResultRecord resultRecord = resultRecords[index+position];
+        ApartmentBriefDescription apartmentBriefDescription = new ApartmentBriefDescription(resultRecord.getCost(), resultRecord.getNeighborhood(), resultRecord.getStreet(), resultRecord.getNumber(), resultRecord.getNumberOfRooms(), resultRecord.getNumberOfRoomates());
+        return apartmentBriefDescription;
+    }
+
 
     public List<ApartmentBriefDescription>  getApartmentBriefDescriptions() {
         List<ApartmentBriefDescription> apartmentBriefDescriptions = new ArrayList<>();
@@ -154,13 +178,15 @@ public class ResultsActivity extends AppCompatActivity {
     public void openApartmentFullDescription(int index){
         DataHolder.getInstance().setIndex(this.index);
         DataHolder.getInstance().setResultRecords(resultRecords);
+        DataHolder.getInstance().setMode(mode);
+
         int numberOfRecord = this.index + index;
         ResultRecord resultRecord = resultRecords[numberOfRecord];
+        String resultRecordString = (new Gson()).toJson(resultRecord);
 
-
-        ApartmentFullDescription apartmentFullDescription = new ApartmentFullDescription(resultRecord);
+        //ApartmentFullDescription apartmentFullDescription = new ApartmentFullDescription(resultRecord);
         Intent intent = new Intent(this, ApartmentFullDescriptionActivity.class);
-        intent.putExtra("APARTMENT_FULL_DESCRIPTION", apartmentFullDescription.toString());
+        intent.putExtra("APARTMENT_FULL_DESCRIPTION", resultRecordString);
         startActivity(intent);
 
     }

@@ -43,4 +43,11 @@
     <string name="rooms">חדרים:</string>
     <string name="amountOfRoomates">כמות שותפים:</string>
     <string name="roomates">שותפים:</string>
+    <string name="colon">:</string>
+    <string name="call">תקשר\\י</string>
+    <string name="contacts">אנשי קשר:</string>
+    <string name="sourceText">טקסט מקור:</string>
+    <string name="floor">קומה:</string>
+    <string name="size">גודל דירה:</string>
+    <string name="sqrMeters">מ\"ר</string>
 </resources>

@@ -16,10 +16,10 @@ import org.w3c.dom.Text;
  * Created by TAMIR on 3/22/2018.
  */
 
-public class MyAdapter extends ArrayAdapter<String> {
+public class BriefDescriptionListAdapter extends ArrayAdapter<String> {
     private ApartmentBriefDescription[] records;
     private Context context;
-    public MyAdapter(Context context, ApartmentBriefDescription[] records) {
+    public BriefDescriptionListAdapter(Context context, ApartmentBriefDescription[] records) {
         super(context, R.layout.listview_item);
         this.records = records;
         this.context = context;

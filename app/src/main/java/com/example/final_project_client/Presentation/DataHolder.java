@@ -9,7 +9,7 @@ import com.example.final_project_client.UserSearchingUtils.ResultRecord;
 public class DataHolder {
     private ResultRecord [] resultRecords;
     private int index;
-
+    private int mode;
     private MapViewFragment mapViewFragment;
     private ListViewFragment listViewFragment;
     private boolean onFirstLaunch;
@@ -19,6 +19,7 @@ public class DataHolder {
     private DataHolder(){
         resultRecords = new ResultRecord[0];
         index = 0;
+        mode = 0;
         onFirstLaunch = true;
     }
 
@@ -73,5 +74,13 @@ public class DataHolder {
 
     public void setOnFirstLaunch(boolean onFirstLaunch) {
         this.onFirstLaunch = onFirstLaunch;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }
