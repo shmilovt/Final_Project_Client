@@ -34,6 +34,14 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
     private TextView sizeTxt;
     private TextView roomsTxt;
     private TextView roomatesTxt;
+    private TextView distanceFromUniversityTxt;
+    private TextView publishDateTxt;
+    private TextView furnitureTxt;
+    private TextView protectedSpaceTxt;
+    private TextView animalsTxt;
+    private TextView warehouseTxt;
+    private TextView balconyTxt;
+    private TextView gardenTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,54 +84,123 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
 
         costTxt.setText(costString);
 
-        sizeTxt =  (TextView) findViewById(R.id.sizeTxt);
+        sizeTxt = (TextView) findViewById(R.id.sizeTxt);
         int size = resultRecord.getSize();
         String sizeString;
-        if(size >= 0){
-            sizeString = ""+size;
-        }
-        else{
+        if (size >= 0) {
+            sizeString = "" + size;
+        } else {
             sizeString = "---";
         }
         sizeTxt.setText(sizeString);
 
-       roomsTxt = (TextView) findViewById(R.id.roomsTxt);
-       double rooms = resultRecord.getNumberOfRooms();
+        roomsTxt = (TextView) findViewById(R.id.roomsTxt);
+        double rooms = resultRecord.getNumberOfRooms();
 
-       String roomsString;
-       if(rooms<=0){
-           roomsString = "---";
-       }
-       else if (rooms == 1){
-           roomsString = "דירת יחיד";
-       }
-       else {
-           if(rooms%1 == 0)
-            roomsString = ""+(int)rooms;
-           else{
-               roomsString = ""+rooms;
-           }
-       }
+        String roomsString;
+        if (rooms <= 0) {
+            roomsString = "---";
+        } else if (rooms == 1) {
+            roomsString = "דירת יחיד";
+        } else {
+            if (rooms % 1 == 0)
+                roomsString = "" + (int) rooms;
+            else {
+                roomsString = "" + rooms;
+            }
+        }
 
-       roomsTxt.setText(roomsString);
+        roomsTxt.setText(roomsString);
 
-       roomatesTxt = (TextView) findViewById(R.id.roomatesTxt);
-       int roomates = resultRecord.getNumberOfRoomates();
-       String roomatesString;
-       if(roomates<0){
-           roomatesString = "---";
-       }
-       else if(roomates == 0){
-           roomatesString = "יחיד/זוג";
-       }
-       else if(roomates == 1){
-           roomatesString = "יחיד";
-       }
-       else{
-           roomatesString = ""+roomates;
-       }
+        roomatesTxt = (TextView) findViewById(R.id.roomatesTxt);
+        int roomates = resultRecord.getNumberOfRoomates();
+        String roomatesString;
+        if (roomates < 0) {
+            roomatesString = "---";
+        } else if (roomates == 0) {
+            roomatesString = "יחיד/זוג";
+        } else if (roomates == 1) {
+            roomatesString = "יחיד";
+        } else {
+            roomatesString = "" + roomates;
+        }
 
-       roomatesTxt.setText(roomatesString);
+        roomatesTxt.setText(roomatesString);
+
+        distanceFromUniversityTxt = (TextView) findViewById(R.id.distanceFromUniversityTxt);
+        int distanceFromUniversity = (int) resultRecord.getDistanceFromUniversity();
+        String distanceFromUniversityString;
+        if (distanceFromUniversity < 0) {
+            distanceFromUniversityString = "---";
+        } else {
+            distanceFromUniversityString = "" + distanceFromUniversity;
+        }
+        distanceFromUniversityTxt.setText(distanceFromUniversityString);
+
+        publishDateTxt = (TextView) findViewById(R.id.publishDateTxt);
+        publishDateTxt.setText(resultRecord.getDateOfPublish());
+
+        furnitureTxt = (TextView) findViewById(R.id.furnitureTxt);
+        String furnitureString;
+
+        switch (resultRecord.getFurniture()) {
+            case 0:
+                furnitureString = "אין";
+                break;
+            case 1:
+                furnitureString = "ריהוט חלקי";
+                break;
+            case 2:
+                furnitureString = "ריהוט מלא";
+                break;
+            default:
+                furnitureString = "";
+                break;
+        }
+
+        furnitureTxt.setText(furnitureString);
+
+        protectedSpaceTxt = (TextView) findViewById(R.id.protectedSpaceTxt);
+        warehouseTxt = (TextView) findViewById(R.id.warehouseTxt);
+        animalsTxt = (TextView) findViewById(R.id.animalsTxt);
+        balconyTxt = (TextView) findViewById(R.id.balconyTxt);
+        gardenTxt = (TextView) findViewById(R.id.gardenTxt);
+
+        String checkMark = "\u2713";
+        String crossMark = "\u2718";
+        String animalsString, balconyString, protectedSpaceString, warehouseString, yardString;
+        if (resultRecord.isAnimals()) {
+            animalsString = checkMark;
+        } else {
+            animalsString = crossMark;
+        }
+        if (resultRecord.isBalcony()) {
+            balconyString = checkMark;
+        } else {
+            balconyString = crossMark;
+        }
+        if (resultRecord.isProtectedSpace()) {
+            protectedSpaceString = checkMark;
+        } else {
+            protectedSpaceString = crossMark;
+        }
+        if (resultRecord.isWarehouse()) {
+            warehouseString = checkMark;
+        } else {
+            warehouseString = crossMark;
+        }
+        if (resultRecord.isYard()) {
+            yardString = checkMark;
+        } else {
+            yardString = crossMark;
+        }
+
+        protectedSpaceTxt.setText(protectedSpaceString);
+        animalsTxt.setText(animalsString);
+        gardenTxt.setText(yardString);
+        warehouseTxt.setText(warehouseString);
+        balconyTxt.setText(balconyString);
+
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {

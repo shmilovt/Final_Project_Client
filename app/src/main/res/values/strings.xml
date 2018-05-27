@@ -50,4 +50,14 @@
     <string name="floor">קומה:</string>
     <string name="size">גודל דירה:</string>
     <string name="sqrMeters">מ\"ר</string>
+    <string name="distanceFromUniversityAppartmentFullDescription">מרחק הליכה מהאוניברסיטה:</string>
+    <string name="minutes">דקות</string>
+    <string name="publishDate">תאריך פרסום:</string>
+    <string name="additions">תוספות:</string>
+    <string name="furnitureFullDescription">ריהוט:</string>
+    <string name="gardenFullDescription">גינה:</string>
+    <string name="protectedSpaceFullDescription">מרחב מוגן:</string>
+    <string name="warehouseFullDescription">מחסן:</string>
+    <string name="balconyFullDescription">מרפסת:</string>
+    <string name="animalsFullDescription">חיות:</string>
 </resources>

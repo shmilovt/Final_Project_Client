@@ -64,12 +64,18 @@ public class ApartmentFullDescription {
             yard = "אין";
         }
         switch (resultRecord.getFurniture()) {
-            case 0: furniture = "אין";
-            case 1: furniture = "ריהוט חלקי";
-            case 2: furniture = "ריהוט מלא";
-                default:
-                    furniture = "";
-                    break;
+            case 0:
+                furniture = "אין";
+                break;
+            case 1:
+                furniture = "ריהוט חלקי";
+                break;
+            case 2:
+                furniture = "ריהוט מלא";
+                break;
+            default:
+                furniture = "";
+                break;
         }
         for (Contact contact : resultRecord.getContacts()) {
             if (!contact.getName().equals(""))
@@ -94,25 +100,25 @@ public class ApartmentFullDescription {
         distaceFromUniversity = "מרחק הליכה מאוניברסיטה: " + distaceFromUniversity + " דקות";
         contacts = "אנשי קשר: " + "\n" + contacts;
         txt = "מקור: " + "\n" + txt;
-        balcony = "מרפסת: "+ balcony;
-        yard = "גינה/חצר: "+ yard;
-        protectedSpace = "מרחב מוגן: "+ protectedSpace;
-        animals = "חיות: "+ animals;
-        warehouse = "מחסן: "+ warehouse;
+        balcony = "מרפסת: " + balcony;
+        yard = "גינה/חצר: " + yard;
+        protectedSpace = "מרחב מוגן: " + protectedSpace;
+        animals = "חיות: " + animals;
+        warehouse = "מחסן: " + warehouse;
 
 
         output = date + "\n\n" + address + "\n\n" + neighborhood + "\n\n" + floor + "\n\n" + cost + "\n\n" + numOfRoomates + "\n\n" + numOfRooms + "\n\n" + apartmentSize + "\n\n" + distaceFromUniversity
                 + "\n\n" + balcony
                 + "\n" + yard
                 + "\n" + warehouse
-                + "\n" +  protectedSpace
-                + "\n" +  animals
+                + "\n" + protectedSpace
+                + "\n" + animals
                 + "\n" + furniture;
-        if (!furniture.equals("")){
+        if (!furniture.equals("")) {
             output = output + "\n\n" + furniture;
         }
 
-       output = output + "\n\n" + contacts + "\n\n" + txt;
+        output = output + "\n\n" + contacts + "\n\n" + txt;
         return output;
     }
 }
