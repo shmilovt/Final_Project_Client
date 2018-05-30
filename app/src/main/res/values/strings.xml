@@ -69,4 +69,7 @@
     <string name="dontHave">אין</string>
     <string name="permitted">מותר</string>
     <string name="forbidden">אסור</string>
+    <string name="fullFurniture">ריהוט מלא</string>
+    <string name="partialFurniture">ריהוט חלקי</string>
+    <string name="dontHaveFurniture">אין ריהוט</string>
 </resources>

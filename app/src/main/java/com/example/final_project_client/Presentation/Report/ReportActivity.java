@@ -32,8 +32,14 @@ public class ReportActivity extends AppCompatActivity {
 
         switch (reportCategory) {
             case furniture:
+                FurnitureReportFragment furnitureReportFragment = new FurnitureReportFragment();
+                reportFragment = furnitureReportFragment ;
+                (getFragmentManager().beginTransaction()).add(R.id.reportForm, furnitureReportFragment ).commit();
                 break;
             case protectedSpace:
+                ProtectedSpaceReportFragment protectedSpaceReportFragment = new ProtectedSpaceReportFragment();
+                reportFragment = protectedSpaceReportFragment;
+                (getFragmentManager().beginTransaction()).add(R.id.reportForm, protectedSpaceReportFragment).commit();
                 break;
             case cost:
                 CostReportFragment costReportFragment = new CostReportFragment();
@@ -81,6 +87,9 @@ public class ReportActivity extends AppCompatActivity {
                 (getSupportFragmentManager().beginTransaction()).add(R.id.reportForm, roomatesReportFragment).commit();
                 break;
             case warehouse:
+                WarehouseReportFragment warehouseReportFragment = new WarehouseReportFragment();
+                reportFragment = warehouseReportFragment;
+                (getFragmentManager().beginTransaction()).add(R.id.reportForm, warehouseReportFragment).commit();
                 break;
             default:
                 break;
