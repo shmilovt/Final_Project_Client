@@ -48,9 +48,7 @@ public class ContactListAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.contacts_list_item, parent, false);
             viewHolder.contactNameTxt = (TextView) convertView.findViewById(R.id.contactName);
-            viewHolder.contactPhoneTxt = (TextView) convertView.findViewById(R.id.contactPhone);
-            viewHolder.callBtn = (ImageButton) convertView.findViewById(R.id.callBtn);
-            viewHolder.colonTxt = (TextView) convertView.findViewById(R.id.ContactListItemColon);
+            viewHolder.callBtn = (Button) convertView.findViewById(R.id.callBtn);
             convertView.setTag(viewHolder);
 
         }
@@ -62,22 +60,16 @@ public class ContactListAdapter extends ArrayAdapter<String> {
         String contactName =  contact.getName() ;
         final String contactPhone = contact.getPhone() ;
 
-        if (contactName.compareTo("") == 0){
-            viewHolder.colonTxt.setText("");
-        }
+
 
         viewHolder.contactNameTxt.setText(contactName);
-        viewHolder.contactPhoneTxt.setText(contactPhone);
+        viewHolder.callBtn.setBackgroundResource(android.R.drawable.btn_default);
+        viewHolder.callBtn.setText(contactPhone  +" \u260E");
         viewHolder.callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:0522204747" /*+ contactPhone*/));
-
-                if (ActivityCompat.checkSelfPermission(context,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+ contactPhone));
                 context.startActivity(callIntent);
             }
         });
@@ -88,8 +80,6 @@ public class ContactListAdapter extends ArrayAdapter<String> {
 
     static class ContactsListItemHolder{
         TextView contactNameTxt;
-        TextView contactPhoneTxt;
-        TextView colonTxt;
-        ImageButton   callBtn;
+        Button   callBtn;
     }
 }

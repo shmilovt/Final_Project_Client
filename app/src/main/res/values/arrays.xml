@@ -29,7 +29,7 @@
         <item>5 חדרים</item>
         <item>6 חדרים ומעלה</item>
    </string-array>
-    <string-array name="numberOdRoomates" >
+    <string-array name="numberOfRoomates" >
         <item>לא נבחר</item>
         <item>ללא שותפים</item>
         <item>זוג</item>
@@ -39,6 +39,17 @@
         <item>4 שותפים</item>
         <item>5 שותפים ומעלה</item>
     </string-array>
+
+    <string-array name="numberOfRoomatesReport" >
+        <item></item>
+        <item>דירת יחיד</item>
+        <item>זוג</item>
+        <item>2 שותפים</item>
+        <item>3 שותפים</item>
+        <item>4 שותפים</item>
+        <item>5 שותפים</item>
+    </string-array>
+
     <string-array name="furniture" >
         <item>לא נבחר</item>
         <item>ריהוט מלא</item>

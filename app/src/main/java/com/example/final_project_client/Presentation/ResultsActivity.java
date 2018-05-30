@@ -182,12 +182,8 @@ public class ResultsActivity extends AppCompatActivity {
 
         int numberOfRecord = this.index + index;
         ResultRecord resultRecord = resultRecords[numberOfRecord];
-        String resultRecordString = (new Gson()).toJson(resultRecord);
-
-        //ApartmentFullDescription apartmentFullDescription = new ApartmentFullDescription(resultRecord);
+        ApartmentFullDescriptionActivityDataHolder.getInstance().setResultRecord(resultRecord);
         Intent intent = new Intent(this, ApartmentFullDescriptionActivity.class);
-        intent.putExtra("APARTMENT_FULL_DESCRIPTION", resultRecordString);
         startActivity(intent);
-
     }
 }

@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/txtNumberOfRoomates"
         android:drawSelectorOnTop="true"
-        android:entries="@array/numberOdRoomates"
+        android:entries="@array/numberOfRoomates"
         android:textAlignment="center"
         >
     </Spinner>

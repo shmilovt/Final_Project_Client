@@ -1,30 +1,30 @@
 package com.example.final_project_client.Presentation;
 
-
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
+import com.example.final_project_client.Presentation.Report.ReportActivity;
 import com.example.final_project_client.R;
 import com.example.final_project_client.UserSearchingUtils.ResultRecord;
-import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by TAMIR on 5/1/2018.
  */
 
+
+
 public class ApartmentFullDescriptionActivity extends AppCompatActivity {
+    public static final String CATEGORY = "com.example.final_project_client.CATEGORY";
+    public static final String  SOURCE_TEXT = "com.example.final_project_client.SOURCE_TEXT";
     private ResultRecord resultRecord;
     private ListView contactsListView;
     private TextView sourceText;
@@ -42,14 +42,25 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
     private TextView warehouseTxt;
     private TextView balconyTxt;
     private TextView gardenTxt;
+    private Button editAddressBtn;
+    private Button editCostBtn;
+    private Button editFloorBtn;
+    private Button editSizeBtn;
+    private Button editRoomsBtn;
+    private Button editRoomatesBtn;
+    private Button editFurnitureBtn;
+    private Button editGardenBtn;
+    private Button editProtectedSpaceBtn;
+    private Button editBalconyBtn;
+    private Button editWarehouseBtn;
+    private Button editAnimalsBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actiivity_apartment_full_description);
-        Intent intent = getIntent();
-        String resultRecordString = intent.getStringExtra(ResultsActivity.APARTMENT_FULL_DESCRIPTION);
-        resultRecord = new Gson().fromJson(resultRecordString, ResultRecord.class);
+        resultRecord = ApartmentFullDescriptionActivityDataHolder.getInstance().getResultRecord();
 
         contactsListView = (ListView) findViewById(R.id.listViewContacts);
         ContactListAdapter contactListAdapter = new ContactListAdapter(ApartmentFullDescriptionActivity.this, resultRecord.getContacts());
@@ -201,6 +212,8 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         warehouseTxt.setText(warehouseString);
         balconyTxt.setText(balconyString);
 
+        setClickListenersToButtons();
+
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
@@ -223,5 +236,117 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
+
+    public void startReportActivity(ReportCategory reportCategory) {
+        Intent intent = new Intent(this, ReportActivity.class);
+        intent.putExtra(CATEGORY, new Gson().toJson(reportCategory));
+        intent.putExtra(SOURCE_TEXT , resultRecord.getText());
+        startActivity(intent);
+        String cvf = "\u270f";
+    }
+
+
+    private void setClickListenersToButtons() {
+
+        editAddressBtn = (Button) findViewById(R.id.editAddressBtn);
+        editAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.address);
+            }
+        });
+
+        editCostBtn = (Button) findViewById(R.id.editCostBtn);
+        editCostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.cost);
+            }
+        });
+
+        editFloorBtn = (Button) findViewById(R.id.editFloorBtn);
+        editFloorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.floor);
+            }
+        });
+
+        editRoomsBtn = (Button) findViewById(R.id.editRoomsBtn);
+        editRoomsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.rooms);
+            }
+        });
+
+        editSizeBtn = (Button) findViewById(R.id.editSizeBtn);
+        editSizeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.size);
+            }
+        });
+
+        editRoomatesBtn = (Button) findViewById(R.id.editRoomatesBtn);
+        editRoomatesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.roomates);
+            }
+        });
+
+        editAnimalsBtn = (Button) findViewById(R.id.editAnimalsBtn);
+        editAnimalsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.animals);
+            }
+        });
+
+        editBalconyBtn = (Button) findViewById(R.id.editBalconyBtn);
+        editBalconyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.balcony);
+            }
+        });
+
+        editFurnitureBtn = (Button) findViewById(R.id.editFurnitureBtn);
+        editFurnitureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.furniture);
+            }
+        });
+
+
+        editGardenBtn = (Button) findViewById(R.id.editGardenBtn);
+        editGardenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.garden);
+            }
+        });
+
+        editWarehouseBtn = (Button) findViewById(R.id.editWarehouseBtn);
+        editWarehouseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.warehouse);
+            }
+        });
+
+        editProtectedSpaceBtn = (Button) findViewById(R.id.editProtectedSpaceBtn);
+        editProtectedSpaceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startReportActivity(ReportCategory.protectedSpace);
+            }
+        });
+
+
+    }
+
 }
 
