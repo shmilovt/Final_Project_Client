@@ -5,6 +5,9 @@ package com.example.final_project_client.DTOs;
  */
 
 public class ResultRecordDTO {
+
+
+    private String apartmentID;
     private String street;
     private int number;
     private String neighborhood;
@@ -27,6 +30,15 @@ public class ResultRecordDTO {
     private double lon; // קווי רוחב
 
     public ResultRecordDTO(){}
+
+
+    public String getApartmentID() {
+        return apartmentID;
+    }
+
+    public void setApartmentID(String apartmentID) {
+        this.apartmentID = apartmentID;
+    }
 
     public String getStreet() {
         return street;
@@ -64,7 +76,7 @@ public class ResultRecordDTO {
         return distanceFromUniversity;
     }
 
-    public void setDistanceFromUniversity(int distanceFromUniversity) {
+    public void setDistanceFromUniversity(double distanceFromUniversity) {
         this.distanceFromUniversity = distanceFromUniversity;
     }
 

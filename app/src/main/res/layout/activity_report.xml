@@ -1,51 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layoutDirection="rtl"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="15dp"
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/reportForm"
-                android:layout_marginBottom="30dp">
+            android:orientation="horizontal">
 
-
-            </FrameLayout>
-            <Button
+            <TextView
+                android:id="@+id/reportActivityTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/send"
-                android:id="@+id/sendBtn"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/category_background"
-                android:text="" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sourceText"
+                android:text="@string/sendFixTO"
                 android:textColor="#b20113"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/sourceTextReport"
-                android:layout_width="match_parent"
+                android:id="@+id/reportActivityFieldTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textColor="#b20113"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
-    </ScrollView>
+
+
+        <TextView
+            android:id="@+id/categoryReportTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/reportHelp"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <FrameLayout
+            android:id="@+id/reportForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"></FrameLayout>
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/category_background"
+            android:text="" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sourceText"
+            android:textColor="#b20113"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/sourceTextReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+</ScrollView>
 

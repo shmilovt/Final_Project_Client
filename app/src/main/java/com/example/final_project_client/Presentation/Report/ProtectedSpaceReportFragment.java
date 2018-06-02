@@ -18,7 +18,7 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
     private View mView;
     private Button haveProtectedSpaceBtn;
     private Button dontHaveProtectedSpaceBtn;
-    private Boolean hasProtectedSpace = null;
+    private Integer hasProtectedSpace = null;
 
     public ProtectedSpaceReportFragment() {
 
@@ -38,6 +38,8 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
         mView = inflater.inflate(R.layout.fragment_positive_negative_report, container, false);
         haveProtectedSpaceBtn = (Button)mView.findViewById(R.id.positiveBtn);
         dontHaveProtectedSpaceBtn = (Button)mView.findViewById(R.id.negativeBtn);
+        haveProtectedSpaceBtn.setText(R.string.haveProtectedSpace);
+        dontHaveProtectedSpaceBtn.setText(R.string.dontHaveProtectedSpace);
         dontHaveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveProtectedSpaceBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +47,7 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
             public void onClick(View v) {
                 haveProtectedSpaceBtn.setBackgroundResource(R.drawable.choosen_button);
                 dontHaveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasProtectedSpace = true;
+                hasProtectedSpace = 1;
             }
         });
 
@@ -54,7 +56,7 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
             public void onClick(View v) {
                 dontHaveProtectedSpaceBtn.setBackgroundResource(R.drawable.choosen_button);
                 haveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasProtectedSpace = false;
+                hasProtectedSpace = 0;
             }
         });
         return mView;

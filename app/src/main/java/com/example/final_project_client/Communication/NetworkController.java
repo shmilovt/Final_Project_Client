@@ -8,8 +8,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.final_project_client.DTOs.ReportDTO;
 import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.DTOs.UserSearchDTO;
+import com.example.final_project_client.Presentation.Report.Report;
 import com.example.final_project_client.UserSearchingUtils.SearchResults;
 import com.example.final_project_client.UserSearchingUtils.UserSearch;
 import com.google.gson.Gson;
@@ -123,7 +125,55 @@ public class NetworkController implements CommunicationInterface {
 
 
         }
+
+    public void sendReport(Report report, final NetworkListener<String> listener, final NetworkListener<String> errorListener) {
+
+        long time = System.nanoTime();
+        if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
+            String fullURL = URL + "/addUserReport";
+            ReportDTO reportDTO = new ReportDTO(report);
+            final String jsonString = ReportDTO.toJSON(reportDTO);
+            System.out.println(jsonString);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, fullURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            listener.getResult(response);
+                        }
+
+
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+
+                            errorListener.getResult(error.toString());
+                        }
+
+
+
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("report", jsonString);
+                    return params;
+                }
+            };
+
+
+            stringRequest.setShouldCache(false);
+            queue.add(stringRequest);
+            lastTimeRequestSend = System.nanoTime();
+        }
+
+
     }
+}
 
 
 

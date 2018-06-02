@@ -16,7 +16,7 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
     private View mView;
     private Button haveGardenBtn;
     private Button dontHaveGardenBtn;
-    private Boolean hasGarden = null;
+    private Integer hasGarden = null;
 
     public GardenReportFragment() {
 
@@ -36,6 +36,9 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
         mView = inflater.inflate(R.layout.fragment_positive_negative_report, container, false);
         haveGardenBtn = (Button)mView.findViewById(R.id.positiveBtn);
         dontHaveGardenBtn = (Button)mView.findViewById(R.id.negativeBtn);
+
+        haveGardenBtn.setText(R.string.haveGarden);
+        dontHaveGardenBtn.setText(R.string.dontHaveGarden);
         dontHaveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveGardenBtn.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +46,7 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
             public void onClick(View v) {
                 haveGardenBtn.setBackgroundResource(R.drawable.choosen_button);
                 dontHaveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasGarden = true;
+                hasGarden = 1;
             }
         });
 
@@ -52,7 +55,7 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
             public void onClick(View v) {
                 dontHaveGardenBtn.setBackgroundResource(R.drawable.choosen_button);
                 haveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasGarden = false;
+                hasGarden = 0;
             }
         });
         return mView;

@@ -20,7 +20,7 @@
         <item>עד 15 דקות</item>
         <item>עד 20 דקות</item>
     </string-array>
-    <string-array name="numberOdRooms" >
+    <string-array name="numberOfRooms" >
         <item>לא נבחר</item>
         <item>דירת יחיד</item>
         <item>2 חדרים</item>
@@ -41,7 +41,7 @@
     </string-array>
 
     <string-array name="numberOfRoomatesReport" >
-        <item></item>
+        <item>לא נבחר</item>
         <item>דירת יחיד</item>
         <item>זוג</item>
         <item>2 שותפים</item>
@@ -55,6 +55,19 @@
         <item>ריהוט מלא</item>
         <item>ריהוט חלקי</item>
         <item>ללא ריהוט</item>
+    </string-array>
+    <string-array name="numberOfRoomsOptions">
+        <item>לא נבחר</item>
+        <item>דירת יחיד</item>
+        <item>2 חדרים</item>
+        <item>2.5 חדרים</item>
+        <item>3 חדרים</item>
+        <item>3.5 חדרים</item>
+        <item>4 חדרים</item>
+        <item>4.5 חדרים</item>
+        <item>5 חדרים</item>
+        <item>5.5 חדרים</item>
+        <item>6 חדרים</item>
     </string-array>
     >>
 </resources>

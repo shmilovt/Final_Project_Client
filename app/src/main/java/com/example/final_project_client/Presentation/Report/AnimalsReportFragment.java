@@ -19,7 +19,7 @@ public class AnimalsReportFragment extends Fragment implements ReportFragment{
     private View mView;
     private Button permittedAnimalsBtn;
     private Button forbiddenAnimalsBtn;
-    private Boolean isAnimalsPermitted = null;
+    private Integer isAnimalsPermitted = null;
 
     public AnimalsReportFragment() {
 
@@ -41,14 +41,14 @@ public class AnimalsReportFragment extends Fragment implements ReportFragment{
         forbiddenAnimalsBtn = (Button)mView.findViewById(R.id.negativeBtn);
         forbiddenAnimalsBtn.setBackgroundResource(android.R.drawable.btn_default);
         permittedAnimalsBtn.setBackgroundResource(android.R.drawable.btn_default);
-        permittedAnimalsBtn.setText(R.string.permitted);
-        forbiddenAnimalsBtn.setText(R.string.forbidden);
+        permittedAnimalsBtn.setText(R.string.permittedAnimals);
+        forbiddenAnimalsBtn.setText(R.string.forbiddenAnimals);
         permittedAnimalsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 permittedAnimalsBtn.setBackgroundResource(R.drawable.choosen_button);
                 forbiddenAnimalsBtn.setBackgroundResource(android.R.drawable.btn_default);
-                isAnimalsPermitted = true;
+                isAnimalsPermitted = 1;
             }
         });
 
@@ -57,7 +57,7 @@ public class AnimalsReportFragment extends Fragment implements ReportFragment{
             public void onClick(View v) {
                 forbiddenAnimalsBtn.setBackgroundResource(R.drawable.choosen_button);
                 permittedAnimalsBtn.setBackgroundResource(android.R.drawable.btn_default);
-                isAnimalsPermitted = false;
+                isAnimalsPermitted = 0;
             }
         });
         return mView;

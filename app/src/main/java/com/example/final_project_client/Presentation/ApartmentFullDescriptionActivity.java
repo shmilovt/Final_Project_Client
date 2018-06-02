@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.final_project_client.Presentation.Report.Field;
 import com.example.final_project_client.Presentation.Report.ReportActivity;
 import com.example.final_project_client.R;
 import com.example.final_project_client.UserSearchingUtils.ResultRecord;
@@ -25,6 +26,7 @@ import com.google.gson.Gson;
 public class ApartmentFullDescriptionActivity extends AppCompatActivity {
     public static final String CATEGORY = "com.example.final_project_client.CATEGORY";
     public static final String  SOURCE_TEXT = "com.example.final_project_client.SOURCE_TEXT";
+    public static final String  APARTMENT_ID = "com.example.final_project_client.APARTMENT_ID";
     private ResultRecord resultRecord;
     private ListView contactsListView;
     private TextView sourceText;
@@ -237,12 +239,13 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
-    public void startReportActivity(ReportCategory reportCategory) {
+    public void startReportActivity(Field field) {
         Intent intent = new Intent(this, ReportActivity.class);
-        intent.putExtra(CATEGORY, new Gson().toJson(reportCategory));
+        intent.putExtra(CATEGORY, new Gson().toJson(field));
+        intent.putExtra(APARTMENT_ID, resultRecord.getApartmentID());
         intent.putExtra(SOURCE_TEXT , resultRecord.getText());
         startActivity(intent);
-        String cvf = "\u270f";
+
     }
 
 
@@ -252,7 +255,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editAddressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.address);
+                startReportActivity(Field.address);
             }
         });
 
@@ -260,7 +263,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editCostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.cost);
+                startReportActivity(Field.cost);
             }
         });
 
@@ -268,7 +271,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editFloorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.floor);
+                startReportActivity(Field.floor);
             }
         });
 
@@ -276,7 +279,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editRoomsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.rooms);
+                startReportActivity(Field.numRooms);
             }
         });
 
@@ -284,7 +287,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editSizeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.size);
+                startReportActivity(Field.apartmentSize);
             }
         });
 
@@ -292,7 +295,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editRoomatesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.roomates);
+                startReportActivity(Field.numRoomates);
             }
         });
 
@@ -300,7 +303,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editAnimalsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.animals);
+                startReportActivity(Field.animals);
             }
         });
 
@@ -308,7 +311,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editBalconyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.balcony);
+                startReportActivity(Field.balcony);
             }
         });
 
@@ -316,7 +319,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editFurnitureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.furniture);
+                startReportActivity(Field.furniture);
             }
         });
 
@@ -325,7 +328,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editGardenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.garden);
+                startReportActivity(Field.yard);
             }
         });
 
@@ -333,7 +336,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editWarehouseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.warehouse);
+                startReportActivity(Field.warehouse);
             }
         });
 
@@ -341,7 +344,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editProtectedSpaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(ReportCategory.protectedSpace);
+                startReportActivity(Field.protectedSpace);
             }
         });
 

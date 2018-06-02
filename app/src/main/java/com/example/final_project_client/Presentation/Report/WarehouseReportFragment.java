@@ -18,7 +18,7 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
     private View mView;
     private Button haveWarehouseBtn;
     private Button dontHaveWarehouseBtn;
-    private Boolean hasWarehouse = null;
+    private Integer hasWarehouse = null;
 
     public WarehouseReportFragment() {
 
@@ -38,6 +38,8 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
         mView = inflater.inflate(R.layout.fragment_positive_negative_report, container, false);
         haveWarehouseBtn = (Button)mView.findViewById(R.id.positiveBtn);
         dontHaveWarehouseBtn = (Button)mView.findViewById(R.id.negativeBtn);
+        haveWarehouseBtn.setText(R.string.haveWarehouse);
+        dontHaveWarehouseBtn.setText(R.string.dontHaveWarehouse);
         dontHaveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
         haveWarehouseBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +47,7 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
             public void onClick(View v) {
                 haveWarehouseBtn.setBackgroundResource(R.drawable.choosen_button);
                 dontHaveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasWarehouse = true;
+                hasWarehouse = 1;
             }
         });
 
@@ -54,7 +56,7 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
             public void onClick(View v) {
                 dontHaveWarehouseBtn.setBackgroundResource(R.drawable.choosen_button);
                 haveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
-                hasWarehouse = false;
+                hasWarehouse = 0;
             }
         });
         return mView;

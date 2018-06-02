@@ -7,6 +7,7 @@ import com.example.final_project_client.DTOs.ResultRecordDTO;
  */
 
 public class ResultRecord {
+    private String apartmentID;
     private String street;
     private int number;
     private String neighborhood;
@@ -29,6 +30,7 @@ public class ResultRecord {
     private double lon; // קווי רוחב
 
     public ResultRecord(ResultRecordDTO resultRecordDTO) {
+        apartmentID = resultRecordDTO.getApartmentID();
         street = resultRecordDTO.getStreet();
         number = resultRecordDTO.getNumber();
         neighborhood = resultRecordDTO.getNeighborhood();
@@ -213,5 +215,13 @@ public class ResultRecord {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String getApartmentID() {
+        return apartmentID;
+    }
+
+    public void setApartmentID(String apartmentID) {
+        this.apartmentID = apartmentID;
     }
 }
