@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.example.final_project_client.R;
 import com.example.final_project_client.UserSearchingUtils.ResultRecord;
@@ -185,5 +186,15 @@ public class ResultsActivity extends AppCompatActivity {
         ApartmentFullDescriptionActivityDataHolder.getInstance().setResultRecord(resultRecord);
         Intent intent = new Intent(this, ApartmentFullDescriptionActivity.class);
         startActivity(intent);
+    }
+
+    public void ToastSwipeRight(View view) {
+        mapViewFragment.previousApartmentBrief();
+
+    }
+
+    public void ToastSwipeLeft(View view) {
+        mapViewFragment.nextApartmentBrief();
+
     }
 }

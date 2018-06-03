@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -66,29 +67,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             }
 
             public void onSwipeRight() {
-                if (indexOfDisplayedApartment < apartmentIndexesOfMarker.size() - 1) {
-                    indexOfDisplayedApartment++;
-                    int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
-                    ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription);
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    briefDescriptionFragment = newBriefDescriptionFragment;
-                    transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
-                    transaction.commit();
-                }
+                nextApartmentBrief();
             }
 
             public void onSwipeLeft() {
-                if (indexOfDisplayedApartment > 0) {
-                    indexOfDisplayedApartment--;
-                    int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
-                    ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription);
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    briefDescriptionFragment = newBriefDescriptionFragment;
-                    transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
-                    transaction.commit();
-                }
+                previousApartmentBrief();
+
 
             }
 
@@ -102,6 +86,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 if (indexOfDisplayedApartment >= 0)
                     ((ResultsActivity) getActivity()).openApartmentFullDescription(apartmentIndexesOfMarker.get(indexOfDisplayedApartment));
             }
+
 
 
         });
@@ -152,7 +137,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                     System.out.println("item = " + apartmentIndexesOfMarker.get(indexOfDisplayedApartment));
                     int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
                     ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription);
+                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (briefDescriptionFragment == null) {
                         briefDescriptionFragment = newBriefDescriptionFragment;
@@ -267,6 +252,35 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 map.put(newMarker, indexes);
             }
         }
+    }
+
+    public void nextApartmentBrief(){
+        if (indexOfDisplayedApartment < apartmentIndexesOfMarker.size() - 1) {
+            indexOfDisplayedApartment++;
+            int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
+            ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
+            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            briefDescriptionFragment = newBriefDescriptionFragment;
+            transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
+            transaction.commit();
+        }
+
+    }
+
+
+    public void previousApartmentBrief(){
+        if (indexOfDisplayedApartment > 0) {
+            indexOfDisplayedApartment--;
+            int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
+            ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
+            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            briefDescriptionFragment = newBriefDescriptionFragment;
+            transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
+            transaction.commit();
+        }
+
     }
 
 

@@ -92,4 +92,6 @@
     <string name="dontHaveWarehouse">אין מחסן</string>
     <string name="haveBalcony">יש מרפסת</string>
     <string name="dontHaveBalcony">אין מרפסת</string>
+    <string name="sweptRightSign">\u25b6</string>
+    <string name="sweptLeftSign">\u25c0</string>
 </resources>
