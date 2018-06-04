@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/searchActivity"
-    tools:context="com.example.final_project_client.Presentation.SearchActivity"
+    tools:context="com.example.final_project_client.Presentation.Search.SearchActivity"
     android:layoutDirection="rtl">
 <ScrollView
     android:id="@+id/scrollView"

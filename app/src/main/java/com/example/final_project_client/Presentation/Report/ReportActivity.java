@@ -13,13 +13,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
-import com.example.final_project_client.Presentation.ApartmentFullDescriptionActivity;
-import com.example.final_project_client.Presentation.ReportCategory;
+import com.example.final_project_client.Presentation.FullDescription.ApartmentFullDescriptionActivity;
 import com.example.final_project_client.R;
 import com.google.gson.Gson;
 

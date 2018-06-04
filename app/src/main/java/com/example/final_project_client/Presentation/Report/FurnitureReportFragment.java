@@ -40,15 +40,15 @@ public class FurnitureReportFragment extends Fragment implements ReportFragment 
         fullFurnitureBtn = (Button) mView.findViewById(R.id.fullFurnitureBtn);
         partialFurnitureBtn = (Button) mView.findViewById(R.id.partialFurnitureBtn);
         dontHaveFurnitureBtn = (Button) mView.findViewById(R.id.dontHaveFurnitureBtn);
-        partialFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
-        fullFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
-        dontHaveFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
+        partialFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        fullFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        dontHaveFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
         fullFurnitureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fullFurnitureBtn.setBackgroundResource(R.drawable.choosen_button);
-                partialFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
-                dontHaveFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
+                partialFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+                dontHaveFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 furnitureReportSelection = 2;
             }
         });
@@ -57,8 +57,8 @@ public class FurnitureReportFragment extends Fragment implements ReportFragment 
             @Override
             public void onClick(View v) {
                 partialFurnitureBtn.setBackgroundResource(R.drawable.choosen_button);
-                fullFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
-                dontHaveFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
+                fullFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+                dontHaveFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 furnitureReportSelection = 1;
             }
         });
@@ -67,8 +67,8 @@ public class FurnitureReportFragment extends Fragment implements ReportFragment 
             @Override
             public void onClick(View v) {
                 dontHaveFurnitureBtn.setBackgroundResource(R.drawable.choosen_button);
-                fullFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
-                partialFurnitureBtn.setBackgroundResource(android.R.drawable.btn_default);
+                fullFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+                partialFurnitureBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 furnitureReportSelection = 0;
             }
         });

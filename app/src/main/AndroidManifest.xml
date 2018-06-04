@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Presentation.SearchActivity"
+            android:name=".Presentation.Search.SearchActivity"
             android:focusable="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -31,22 +31,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Presentation.ApartmentFullDescriptionActivity"
+            android:name=".Presentation.FullDescription.ApartmentFullDescriptionActivity"
             android:focusable="true"
-            android:parentActivityName=".Presentation.ResultsActivity"
+            android:parentActivityName=".Presentation.Results.ResultsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Presentation.ResultsActivity" />
+                android:value=".Presentation.Results.ResultsActivity" />
         </activity>
         <activity
-            android:name=".Presentation.ResultsActivity"
-            android:parentActivityName=".Presentation.SearchActivity"
+            android:name=".Presentation.Results.ResultsActivity"
+            android:parentActivityName=".Presentation.Search.SearchActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Presentation.SearchActivity" />
+                android:value=".Presentation.Search.SearchActivity" />
         </activity>
         <!--
            The API key for Google Maps-based APIs is defined as a string resource.
@@ -61,11 +61,11 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".Presentation.Report.ReportActivity"
-            android:parentActivityName=".Presentation.ApartmentFullDescriptionActivity"
+            android:parentActivityName=".Presentation.FullDescription.ApartmentFullDescriptionActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Presentation.ApartmentFullDescriptionActivity" />
+                android:value=".Presentation.FullDescription.ApartmentFullDescriptionActivity" />
 
         </activity>
     </application>

@@ -40,13 +40,13 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
         dontHaveProtectedSpaceBtn = (Button)mView.findViewById(R.id.negativeBtn);
         haveProtectedSpaceBtn.setText(R.string.haveProtectedSpace);
         dontHaveProtectedSpaceBtn.setText(R.string.dontHaveProtectedSpace);
-        dontHaveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
-        haveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
+        dontHaveProtectedSpaceBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        haveProtectedSpaceBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
         haveProtectedSpaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 haveProtectedSpaceBtn.setBackgroundResource(R.drawable.choosen_button);
-                dontHaveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
+                dontHaveProtectedSpaceBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasProtectedSpace = 1;
             }
         });
@@ -55,7 +55,7 @@ public class ProtectedSpaceReportFragment extends Fragment implements ReportFrag
             @Override
             public void onClick(View v) {
                 dontHaveProtectedSpaceBtn.setBackgroundResource(R.drawable.choosen_button);
-                haveProtectedSpaceBtn.setBackgroundResource(android.R.drawable.btn_default);
+                haveProtectedSpaceBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasProtectedSpace = 0;
             }
         });

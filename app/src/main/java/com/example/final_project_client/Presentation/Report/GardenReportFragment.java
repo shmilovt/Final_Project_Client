@@ -39,13 +39,13 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
 
         haveGardenBtn.setText(R.string.haveGarden);
         dontHaveGardenBtn.setText(R.string.dontHaveGarden);
-        dontHaveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
-        haveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
+        dontHaveGardenBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        haveGardenBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
         haveGardenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 haveGardenBtn.setBackgroundResource(R.drawable.choosen_button);
-                dontHaveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
+                dontHaveGardenBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasGarden = 1;
             }
         });
@@ -54,7 +54,7 @@ public class GardenReportFragment extends Fragment implements ReportFragment {
             @Override
             public void onClick(View v) {
                 dontHaveGardenBtn.setBackgroundResource(R.drawable.choosen_button);
-                haveGardenBtn.setBackgroundResource(android.R.drawable.btn_default);
+                haveGardenBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasGarden = 0;
             }
         });

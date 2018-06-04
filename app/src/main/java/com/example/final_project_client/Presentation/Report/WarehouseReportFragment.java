@@ -40,13 +40,13 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
         dontHaveWarehouseBtn = (Button)mView.findViewById(R.id.negativeBtn);
         haveWarehouseBtn.setText(R.string.haveWarehouse);
         dontHaveWarehouseBtn.setText(R.string.dontHaveWarehouse);
-        dontHaveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
-        haveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
+        dontHaveWarehouseBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        haveWarehouseBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
         haveWarehouseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 haveWarehouseBtn.setBackgroundResource(R.drawable.choosen_button);
-                dontHaveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
+                dontHaveWarehouseBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasWarehouse = 1;
             }
         });
@@ -55,7 +55,7 @@ public class WarehouseReportFragment extends Fragment implements ReportFragment{
             @Override
             public void onClick(View v) {
                 dontHaveWarehouseBtn.setBackgroundResource(R.drawable.choosen_button);
-                haveWarehouseBtn.setBackgroundResource(android.R.drawable.btn_default);
+                haveWarehouseBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasWarehouse = 0;
             }
         });

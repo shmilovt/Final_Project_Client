@@ -1,22 +1,19 @@
 package com.example.final_project_client.UserSearchingUtils;
 
 import com.example.final_project_client.DTOs.CategoryType;
-import com.example.final_project_client.DTOs.CostDTO;
-import com.example.final_project_client.DTOs.FloorDTO;
-import com.example.final_project_client.DTOs.SizeDTO;
-import com.example.final_project_client.Presentation.AnimalsCategoryFragment;
-import com.example.final_project_client.Presentation.BalconyCategoryFragment;
-import com.example.final_project_client.Presentation.CostCategoryFragment;
-import com.example.final_project_client.Presentation.DistanceFromUniversityCategoryFragment;
-import com.example.final_project_client.Presentation.FloorCategoryFragment;
-import com.example.final_project_client.Presentation.FurnitureCategoryFragment;
-import com.example.final_project_client.Presentation.GardenCategoryFragment;
-import com.example.final_project_client.Presentation.NeighborhoodCategoryFragment;
-import com.example.final_project_client.Presentation.NumberOfRoomatesCategoryFragment;
-import com.example.final_project_client.Presentation.NumberOfRoomsCategoryFragment;
-import com.example.final_project_client.Presentation.ProtectedSpaceCategoryFragment;
-import com.example.final_project_client.Presentation.SizeCategoryFragment;
-import com.example.final_project_client.Presentation.WarehouseCategoryFragment;
+import com.example.final_project_client.Presentation.Search.AnimalsCategoryFragment;
+import com.example.final_project_client.Presentation.Search.BalconyCategoryFragment;
+import com.example.final_project_client.Presentation.Search.CostCategoryFragment;
+import com.example.final_project_client.Presentation.Search.DistanceFromUniversityCategoryFragment;
+import com.example.final_project_client.Presentation.Search.FloorCategoryFragment;
+import com.example.final_project_client.Presentation.Search.FurnitureCategoryFragment;
+import com.example.final_project_client.Presentation.Search.GardenCategoryFragment;
+import com.example.final_project_client.Presentation.Search.NeighborhoodCategoryFragment;
+import com.example.final_project_client.Presentation.Search.NumberOfRoomatesCategoryFragment;
+import com.example.final_project_client.Presentation.Search.NumberOfRoomsCategoryFragment;
+import com.example.final_project_client.Presentation.Search.ProtectedSpaceCategoryFragment;
+import com.example.final_project_client.Presentation.Search.SizeCategoryFragment;
+import com.example.final_project_client.Presentation.Search.WarehouseCategoryFragment;
 
 import java.util.ArrayList;
 import java.util.List;

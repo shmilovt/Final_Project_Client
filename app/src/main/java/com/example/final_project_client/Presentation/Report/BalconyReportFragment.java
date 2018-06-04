@@ -41,13 +41,13 @@ public class BalconyReportFragment extends Fragment implements ReportFragment {
         dontHaveBalconyBtn = (Button)mView.findViewById(R.id.negativeBtn);
         haveBalconyBtn.setText(R.string.haveBalcony);
         dontHaveBalconyBtn.setText(R.string.dontHaveBalcony);
-        dontHaveBalconyBtn.setBackgroundResource(android.R.drawable.btn_default);
-        haveBalconyBtn.setBackgroundResource(android.R.drawable.btn_default);
+        dontHaveBalconyBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
+        haveBalconyBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
         haveBalconyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 haveBalconyBtn.setBackgroundResource(R.drawable.choosen_button);
-                dontHaveBalconyBtn.setBackgroundResource(android.R.drawable.btn_default);
+                dontHaveBalconyBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasBalcony = 1;
             }
         });
@@ -56,7 +56,7 @@ public class BalconyReportFragment extends Fragment implements ReportFragment {
             @Override
             public void onClick(View v) {
                 dontHaveBalconyBtn.setBackgroundResource(R.drawable.choosen_button);
-                haveBalconyBtn.setBackgroundResource(android.R.drawable.btn_default);
+                haveBalconyBtn.setBackgroundResource(R.drawable.report_not_selected_button_background);
                 hasBalcony = 0;
             }
         });
