@@ -139,7 +139,7 @@
         android:id="@+id/BtnSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="downloadAlternativeResults"
+        android:onClick="openResultsActivity"
         android:layout_alignParentBottom="true"
         android:text="@string/search"
      />

@@ -131,7 +131,7 @@ public class NetworkController implements CommunicationInterface {
     public synchronized void getAlternativeApartments(final UserSearch userSearch, final NetworkListener<SearchResults> listener, final NetworkListener<String> errorListener) {
         long time = System.nanoTime();
         if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
-            String fullURL = URL + "/alternativeApartments";
+            String fullURL = URL + "/searchApartments";
             UserSearchDTO userSearchDTO = new UserSearchDTO(userSearch);
             final String jsonString = UserSearchDTO.toJSON(userSearchDTO);
             System.out.println(jsonString);

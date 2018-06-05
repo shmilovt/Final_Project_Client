@@ -57,8 +57,8 @@ public class SearchActivity extends AppCompatActivity {
         if (!hasNetwork()) {
             buildDialogNotNetwork(SearchActivity.this).show();
         } else {
-
-          /*  UserSearch userSearch = categoriesManager.convertToUserSearch();
+/*
+            UserSearch userSearch = categoriesManager.convertToUserSearch();
             NetworkController.getInstance(this).searchApartments(userSearch, new NetworkListener<SearchResults>() {
                 @Override
                 public void getResult(SearchResults searchResults) {
