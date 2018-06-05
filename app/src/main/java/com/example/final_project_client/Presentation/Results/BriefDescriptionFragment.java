@@ -42,6 +42,8 @@ public class BriefDescriptionFragment extends Fragment {
         totalApartmentsInBuilding = getArguments().getInt(TOTAL_APARTMENTS);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

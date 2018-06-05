@@ -126,6 +126,59 @@ public class NetworkController implements CommunicationInterface {
 
         }
 
+
+    @Override
+    public synchronized void getAlternativeApartments(final UserSearch userSearch, final NetworkListener<SearchResults> listener, final NetworkListener<String> errorListener) {
+        long time = System.nanoTime();
+        if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
+            String fullURL = URL + "/alternativeApartments";
+            UserSearchDTO userSearchDTO = new UserSearchDTO(userSearch);
+            final String jsonString = UserSearchDTO.toJSON(userSearchDTO);
+            System.out.println(jsonString);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, fullURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
+                            SearchResults searchResults = new SearchResults(searchResultsDTO);
+                            Gson gson = new Gson();
+                            String strResults = gson.toJson(searchResults);
+                            System.out.println(strResults);
+                            listener.getResult(searchResults);
+                        }
+
+
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+
+                            errorListener.getResult(error.toString());
+                        }
+
+
+
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("userSearchDTOString", jsonString);
+                    return params;
+                }
+            };
+
+
+            stringRequest.setShouldCache(false);
+            queue.add(stringRequest);
+            lastTimeRequestSend = System.nanoTime();
+        }
+
+
+    }
+
     public void sendReport(Report report, final NetworkListener<String> listener, final NetworkListener<String> errorListener) {
 
         long time = System.nanoTime();

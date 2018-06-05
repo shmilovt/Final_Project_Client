@@ -9,4 +9,6 @@ import com.example.final_project_client.UserSearchingUtils.UserSearch;
 interface CommunicationInterface {
     void hello(String name,  NetworkListener<String> listener);
     void searchApartments(UserSearch userSearch, NetworkListener<SearchResults> listener, NetworkListener<String> errorListener );
+
+    void getAlternativeApartments(UserSearch userSearch, NetworkListener<SearchResults> listener, NetworkListener<String> errorListener);
 }
