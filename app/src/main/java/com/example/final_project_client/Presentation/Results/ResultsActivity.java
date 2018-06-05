@@ -374,6 +374,7 @@ public class ResultsActivity extends AppCompatActivity {
             else
                 return false;
         } else
+
             return false;
 
     }
