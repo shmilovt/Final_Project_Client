@@ -6,54 +6,59 @@
     android:layoutDirection="rtl">
 
 
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/buttons"
-      >
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
     </FrameLayout>
-<LinearLayout android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentBottom="true"
-    android:background="@color/colorPrimaryDark"
 
-    android:id="@+id/buttons">
-    <Button
-        android:id="@+id/BtnRecentlyResults"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/RecentlyResults"
-        android:layout_weight="1"
-        android:onClick="previousResults"
-       />
-    <Button
-        android:id="@+id/BtnMode"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/map_mode" />
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimaryDark"
 
-    <Button
+        android:orientation="horizontal">
 
-        android:id="@+id/BtnNextResults"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/NextResults"
-        android:onClick="nextResults"
-         />
+        <Button
+            android:id="@+id/BtnRecentlyResults"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/regular_next_previous_button_background"
+            android:onClick="previousResults"
+            android:text="@string/RecentlyResults"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/BtnMode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/regular_next_previous_button_background"
+            android:text="@string/map_mode"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/BtnNextResults"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/regular_next_previous_button_background"
+            android:onClick="nextResults"
+            android:text="@string/NextResults"
+            android:textColor="#ffffff" />
 
 
-</LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

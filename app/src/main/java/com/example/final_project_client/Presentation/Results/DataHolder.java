@@ -8,11 +8,13 @@ import com.example.final_project_client.UserSearchingUtils.ResultRecord;
 
 public class DataHolder {
     private ResultRecord [] resultRecords;
+    private ResultRecord [] alternativeRecords;
     private int index;
     private int mode;
     private MapViewFragment mapViewFragment;
     private ListViewFragment listViewFragment;
     private boolean onFirstLaunch;
+    private int ressultRecordsMode;
 
     private static DataHolder INSTANCE = null;
 
@@ -82,5 +84,21 @@ public class DataHolder {
 
     public void setMode(int mode) {
         this.mode = mode;
+    }
+
+    public void setResultRecordMode(int resultRecordsMode) {
+        this.ressultRecordsMode = resultRecordsMode;
+    }
+
+    public int getRessultRecordsMode() {
+        return ressultRecordsMode;
+    }
+
+    public void setAlternativeRecords( ResultRecord [] alternativeRecords) {
+        this.alternativeRecords = alternativeRecords;
+    }
+
+    public ResultRecord[] getAlternativeRecords() {
+        return alternativeRecords;
     }
 }

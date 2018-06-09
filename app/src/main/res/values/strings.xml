@@ -13,8 +13,8 @@
     <string name="subject">Subject</string>
     <string name="message">Message</string>
     <string name="send">שליחה</string>
-    <string name="map_mode">מפה</string>
-    <string name="record_mode">רשומות</string>
+    <string name="map_mode">תצוגת מפה</string>
+    <string name="record_mode">תצוגת רשומות</string>
     <string name="RecentlyResults">תוצאות קודמות</string>
     <string name="NextResults">תוצאות הבאות</string>
     <string name="search">חיפוש</string>

@@ -57,11 +57,13 @@ public class ResultsActivity extends AppCompatActivity {
 
         if (DataHolder.getInstance().isOnFirstLaunch()) {
             viewMode = 0;
+            resultRecordsMode = 0;
             mapViewFragment = new MapViewFragment();
             listViewFragment = new ListViewFragment();
-
+            DataHolder.getInstance().setAlternativeRecords(null);
             DataHolder.getInstance().setMapViewFragment(mapViewFragment);
             DataHolder.getInstance().setListViewFragment(listViewFragment);
+            DataHolder.getInstance().setResultRecordMode(resultRecordsMode);
             DataHolder.getInstance().setMode(viewMode);
             DataHolder.getInstance().setOnFirstLaunch(false);
             System.out.println("first launch");
@@ -69,7 +71,10 @@ public class ResultsActivity extends AppCompatActivity {
             viewMode = DataHolder.getInstance().getMode();
             mapViewFragment = DataHolder.getInstance().getMapViewFragment();
             listViewFragment = DataHolder.getInstance().getListViewFragment();
+            resultRecordsMode = DataHolder.getInstance().getRessultRecordsMode();
+            alternativeResultRecords = DataHolder.getInstance().getAlternativeRecords();
             mapViewFragment.updateData(this);
+
             System.out.println("not first launch");
         }
         btnMode = findViewById(R.id.BtnMode);
@@ -80,8 +85,7 @@ public class ResultsActivity extends AppCompatActivity {
             if (index == 0)
                 btnRecentlyResults.setEnabled(false);
 
-        }
-        else{
+        } else {
             if (index + MaxDisplay >= alternativeResultRecords.length) {
                 btnNextResults.setEnabled(false);
             }
@@ -123,11 +127,14 @@ public class ResultsActivity extends AppCompatActivity {
         if (resultRecordsMode == 0) {
             if (index + MaxDisplay < resultRecords.length) {
                 index = index + MaxDisplay;
-                mapViewFragment.updateData(this);
-                listViewFragment.updateData(this);
+                updateViews();
                 if (index + MaxDisplay >= resultRecords.length) {
-                    btnNextResults.setEnabled(false);
+                    btnNextResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+                } else {
+                    btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
+
+
                 if (index - MaxDisplay >= 0) {
                     btnRecentlyResults.setEnabled(true);
                 }
@@ -135,56 +142,39 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (alternativeResultRecords == null) {
                     downloadAlternativeResults();
+                } else {
+                    fromSearchResultsToAlternativeResults();
                 }
 
-                if (alternativeResultRecords != null) {
-                    if (alternativeResultRecords.length == 0) {
-                        // if empty show dialog
-                        buildDialogNoAlternativeResults(ResultsActivity.this).show();
-                    } else {
-                        // else switch to alternative;
-                        index = 0;
-                        resultRecordsMode = 1 - resultRecordsMode;
-                        btnRecentlyResults.setEnabled(true);
-                        mapViewFragment.updateData(this);
-                        listViewFragment.updateData(this);
-                        if (index + MaxDisplay >= alternativeResultRecords.length) {
-                            btnNextResults.setEnabled(false);
-                        }
-                    }
-
-                }
             }
 
-        } else if (resultRecordsMode == 1)
-
-        {
+        } else if (resultRecordsMode == 1) {
             if (index + MaxDisplay < alternativeResultRecords.length) {
                 index = index + MaxDisplay;
-                mapViewFragment.updateData(this);
-                listViewFragment.updateData(this);
+                updateViews();
 
                 if (index + MaxDisplay >= alternativeResultRecords.length) {
                     btnNextResults.setEnabled(false);
                 }
                 if (index - MaxDisplay >= 0) {
                     btnRecentlyResults.setEnabled(true);
+                    btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
             }
-        } else
-
-        {
-
         }
 
+    }
+
+    private void updateViews() {
+        mapViewFragment.updateData(this);
+        listViewFragment.updateData(this);
     }
 
     public synchronized void previousResults(View view) {
         if (resultRecordsMode == 0) {
             if (index - MaxDisplay >= 0) {
                 index = index - MaxDisplay;
-                mapViewFragment.updateData(this);
-                listViewFragment.updateData(this);
+                updateViews();
 
                 if (index - MaxDisplay < 0) {
                     btnRecentlyResults.setEnabled(false);
@@ -192,46 +182,40 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (index + MaxDisplay <= resultRecords.length) {
                     btnNextResults.setEnabled(true);
+                    btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
             }
 
         } else if (resultRecordsMode == 1) {
             if (index - MaxDisplay >= 0) {
                 index = index - MaxDisplay;
-                mapViewFragment.updateData(this);
-                listViewFragment.updateData(this);
 
                 if (index - MaxDisplay < 0) {
-                    //set btn of privios to background of results;
-                    btnRecentlyResults.setEnabled(false);
+                    btnRecentlyResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+                } else {
+                    btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
 
                 if (index + MaxDisplay <= resultRecords.length) {
                     btnNextResults.setEnabled(true);
                 }
             } else {
-
-                index = resultRecords.length - MaxDisplay;
-                if (index < 0)
+                btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+                btnNextResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+                if (resultRecords.length <= MaxDisplay)
                     index = 0;
+                else {
+                    index = resultRecords.length - resultRecords.length % MaxDisplay;
+                }
                 resultRecordsMode = 1 - resultRecordsMode;
-                mapViewFragment.updateData(this);
-                listViewFragment.updateData(this);
-
                 if (index - MaxDisplay < 0) {
                     btnRecentlyResults.setEnabled(false);
                 }
 
-                    btnNextResults.setEnabled(true);
+                btnNextResults.setEnabled(true);
 
-
-                // btnNextResults.setBackgroundResource(R.drawable.choosen_button);
-                // btnRecentlyResults.setBackgroundResource(R.drawable.choosen_button);
             }
-
-
-        } else {
-
+            updateViews();
         }
     }
 
@@ -300,6 +284,8 @@ public class ResultsActivity extends AppCompatActivity {
         DataHolder.getInstance().setIndex(this.index);
         DataHolder.getInstance().setResultRecords(resultRecords);
         DataHolder.getInstance().setMode(viewMode);
+        DataHolder.getInstance().setAlternativeRecords(alternativeResultRecords);
+        DataHolder.getInstance().setResultRecordMode(resultRecordsMode);
 
         int numberOfRecord = this.index + index;
         ResultRecord resultRecord = selectedResultRecords[numberOfRecord];
@@ -319,33 +305,38 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public synchronized void downloadAlternativeResults() {
-        if (!hasNetwork()) {
-            buildDialogNotNetwork(ResultsActivity.this).show();
-        } else {
-/*
-            UserSearch userSearch = CategoriesManager.getInstance(this).convertToUserSearch();
-            NetworkController.getInstance(this).getAlternativeApartments(userSearch, new NetworkListener<SearchResults>() {
-                @Override
-                public void getResult(SearchResults searchResults) {
-                    alternativeResultRecords = searchResults.getResultRecords();
-                }
-            }, new NetworkListener<String>() {
-                @Override
-                public void getResult(String errorString) {
-                    buildDialogProblemConnectingToServer(ResultsActivity.this, errorString).show();
-                }
-            });
-*/
+        if (alternativeResultRecords == null) {
+            if (!hasNetwork()) {
+                buildDialogNotNetwork(ResultsActivity.this).show();
+            } else {
+
+                UserSearch userSearch = CategoriesManager.getInstance(this).convertToUserSearch();
+                NetworkController.getInstance(this).getAlternativeApartments(userSearch, new NetworkListener<SearchResults>() {
+                    @Override
+                    public void getResult(SearchResults searchResults) {
+                        alternativeResultRecords = searchResults.getResultRecords();
+
+                        if (alternativeResultRecords != null) {
+                            fromSearchResultsToAlternativeResults();
+                        }
+                    }
+                }, new NetworkListener<String>() {
+                    @Override
+                    public void getResult(String errorString) {
+                        buildDialogProblemConnectingToServer(ResultsActivity.this, errorString).show();
+                    }
+                });
+            }
 
 
-            String jsonString =
+    /*        String jsonString =
                     "{\"resultRecordDTOS\":[{\"apartmentID\":\"13\",\"street\":\"אלעזר בן יאיר\",\"number\":16,\"neighborhood\":\"שכונה ד\u0027\",\"floor\":-2,\"distanceFromUniversity\":18.0,\"cost\":1150,\"size\":-1,\"balcony\":false,\"yard\":true,\"animals\":false,\"warehouse\":false,\"protectedSpace\":false,\"furniture\":2,\"numberOfRooms\":4.0,\"numberOfRoomates\":3,\"dateOfPublish\":\"Tue May 01 05:38:46 IDT 2018\",\"text\":\"השותפה המקסימה שלנו Yarden Peretz עוזבת את הדירה. אני וGal Ben Maman מחפשים מישהי שתחליף את מקומה בחדר. דירת 4 חדרים חדשה משופצת לחלוטין עם חצר ענקית. הדירה באלעזר בן יאיר 16 כרבע שעה מאוניברסיטה. הדירה מרוהטת ויש בה הכל, רק להביא בגדים ולהכנס. עלות 1150 ש\\\"ח. כניסה מיידית :)\\nלפרטים:\\n0526516656\\n\",\"contacts\":[{\"name\":\"\",\"phone\":\"0526516656\"}],\"lat\":31.2628471,\"lon\":34.7904706}, " +
                             "{\"apartmentID\":\"14\",\"street\":\"בצלאל\",\"number\":20,\"neighborhood\":\"שכונה ב\u0027\",\"floor\":-2,\"distanceFromUniversity\":26.0,\"cost\":2150,\"size\":-1,\"balcony\":false,\"yard\":true,\"animals\":false,\"warehouse\":false,\"protectedSpace\":false,\"furniture\":2,\"numberOfRooms\":2.0,\"numberOfRoomates\":0,\"dateOfPublish\":\"Tue May 01 05:38:49 IDT 2018\",\"text\":\"יחידת דיור 2 חדרים להשכרה בשכונה ב\u0027 רחוב בצלאל 20 חמש דקות הליכה למכללת סמי שמעון וקרובה מאוד למרכז חן. היחידה מרוהטת. 2150 כולל מים וארנונה וחשמל עד 150 שח לחודש. לכניסה מיידית .\n\",\"contacts\":[],\"lat\":31.2628471,\"lon\":34.7904706}]}";
             System.out.println(jsonString);
             SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(jsonString);
             SearchResults searchResults = new SearchResults(searchResultsDTO);
             alternativeResultRecords = searchResults.getResultRecords();
-
+*/
 
         }
     }
@@ -414,5 +405,21 @@ public class ResultsActivity extends AppCompatActivity {
 
     private boolean hasNetwork() {
         return isConnected(ResultsActivity.this);
+    }
+
+    public void fromSearchResultsToAlternativeResults() {
+        if (alternativeResultRecords.length == 0) {
+            buildDialogNoAlternativeResults(ResultsActivity.this).show();
+        } else {
+            btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+            btnRecentlyResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+            index = 0;
+            resultRecordsMode = 1 - resultRecordsMode;
+            btnRecentlyResults.setEnabled(true);
+            updateViews();
+            if (index + MaxDisplay >= alternativeResultRecords.length) {
+                btnNextResults.setEnabled(false);
+            }
+        }
     }
 }
