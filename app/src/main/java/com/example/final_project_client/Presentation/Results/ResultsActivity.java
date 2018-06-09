@@ -68,6 +68,7 @@ public class ResultsActivity extends AppCompatActivity {
             DataHolder.getInstance().setOnFirstLaunch(false);
             System.out.println("first launch");
         } else {
+
             viewMode = DataHolder.getInstance().getMode();
             mapViewFragment = DataHolder.getInstance().getMapViewFragment();
             listViewFragment = DataHolder.getInstance().getListViewFragment();
