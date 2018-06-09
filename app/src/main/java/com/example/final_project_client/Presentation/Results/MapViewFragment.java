@@ -87,7 +87,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             }
 
 
-
         });
 
 
@@ -136,7 +135,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                     System.out.println("item = " + apartmentIndexesOfMarker.get(indexOfDisplayedApartment));
                     int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
                     ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
+                    BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment, apartmentIndexesOfMarker.size());
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (briefDescriptionFragment == null) {
                         briefDescriptionFragment = newBriefDescriptionFragment;
@@ -164,6 +163,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                     transaction.commit();
                     briefDescriptionFragment = null;
                     indexOfDisplayedApartment = -1;
+                    apartmentIndexesOfMarker = null;
                 }
 
                 setMarkerHasChoosen(choosenMarker, false);
@@ -188,6 +188,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
 
     @Override
     public void updateData(ResultsActivity resultsActivity) {
+
 
         List<Coordinate> coordinateList = resultsActivity.getCoordinates();
         if (map != null) {
@@ -253,12 +254,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
         }
     }
 
-    public void nextApartmentBrief(){
+    public void nextApartmentBrief() {
         if (indexOfDisplayedApartment < apartmentIndexesOfMarker.size() - 1) {
             indexOfDisplayedApartment++;
             int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
             ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
+            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment, apartmentIndexesOfMarker.size());
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             briefDescriptionFragment = newBriefDescriptionFragment;
             transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
@@ -268,18 +269,30 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     }
 
 
-    public void previousApartmentBrief(){
+    public void previousApartmentBrief() {
         if (indexOfDisplayedApartment > 0) {
             indexOfDisplayedApartment--;
             int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
             ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment , apartmentIndexesOfMarker.size());
+            BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment, apartmentIndexesOfMarker.size());
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             briefDescriptionFragment = newBriefDescriptionFragment;
             transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
             transaction.commit();
         }
 
+    }
+
+
+    public void removeBriefDescription() {
+        if (briefDescriptionFragment != null) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.remove(briefDescriptionFragment);
+            transaction.commit();
+            briefDescriptionFragment = null;
+            indexOfDisplayedApartment = -1;
+            apartmentIndexesOfMarker = null;
+        }
     }
 
 

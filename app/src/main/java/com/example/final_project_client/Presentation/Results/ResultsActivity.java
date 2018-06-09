@@ -85,10 +85,18 @@ public class ResultsActivity extends AppCompatActivity {
         if (resultRecordsMode == 0) {
             if (index == 0)
                 btnRecentlyResults.setEnabled(false);
+            btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
+            if (index + MaxDisplay >= resultRecords.length) {
+                btnNextResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+            }
 
         } else {
+            if (index == 0) {
+                btnRecentlyResults.setBackgroundResource(R.drawable.button_switch_searchresults_alternatives_background);
+            }
             if (index + MaxDisplay >= alternativeResultRecords.length) {
                 btnNextResults.setEnabled(false);
+                btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
             }
         }
 
@@ -125,6 +133,9 @@ public class ResultsActivity extends AppCompatActivity {
 
 
     public synchronized void nextResults(View view) {
+        if (viewMode == 0) {
+            mapViewFragment.removeBriefDescription();
+        }
         if (resultRecordsMode == 0) {
             if (index + MaxDisplay < resultRecords.length) {
                 index = index + MaxDisplay;
@@ -138,6 +149,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (index - MaxDisplay >= 0) {
                     btnRecentlyResults.setEnabled(true);
+                    btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
             } else {
 
@@ -156,6 +168,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (index + MaxDisplay >= alternativeResultRecords.length) {
                     btnNextResults.setEnabled(false);
+                    btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
                 }
                 if (index - MaxDisplay >= 0) {
                     btnRecentlyResults.setEnabled(true);
@@ -172,6 +185,9 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public synchronized void previousResults(View view) {
+        if (viewMode == 0) {
+            mapViewFragment.removeBriefDescription();
+        }
         if (resultRecordsMode == 0) {
             if (index - MaxDisplay >= 0) {
                 index = index - MaxDisplay;
@@ -179,6 +195,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (index - MaxDisplay < 0) {
                     btnRecentlyResults.setEnabled(false);
+                    btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
                 }
 
                 if (index + MaxDisplay <= resultRecords.length) {
@@ -199,6 +216,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 if (index + MaxDisplay <= resultRecords.length) {
                     btnNextResults.setEnabled(true);
+                    btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
                 }
             } else {
                 btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
@@ -211,9 +229,11 @@ public class ResultsActivity extends AppCompatActivity {
                 resultRecordsMode = 1 - resultRecordsMode;
                 if (index - MaxDisplay < 0) {
                     btnRecentlyResults.setEnabled(false);
+                    btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
                 }
 
                 btnNextResults.setEnabled(true);
+
 
             }
             updateViews();
@@ -420,6 +440,7 @@ public class ResultsActivity extends AppCompatActivity {
             updateViews();
             if (index + MaxDisplay >= alternativeResultRecords.length) {
                 btnNextResults.setEnabled(false);
+                btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
             }
         }
     }

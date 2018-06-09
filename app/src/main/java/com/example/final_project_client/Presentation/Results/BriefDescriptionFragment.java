@@ -57,14 +57,24 @@ public class BriefDescriptionFragment extends Fragment {
         TextView swipeRight = (TextView) mView.findViewById(R.id.sweptRightSign);
         TextView swipeLeft = (TextView) mView.findViewById(R.id.sweptLeftSign);
 
-        String pagingString = (position + 1) + "/" + totalApartmentsInBuilding;
-        paging.setText(pagingString);
+        if(totalApartmentsInBuilding == 1){
+            swipeLeft.setEnabled(false);
+            swipeRight.setEnabled(false);
+            swipeLeft.setText("");
+            swipeRight.setText("");
+            paging.setText("");
+        }
+        else{
+            String pagingString = (position + 1) + "/" + totalApartmentsInBuilding;
+            paging.setText(pagingString);
 
-        if(position != 0)
-            swipeRight.setTextColor(getResources().getColor(R.color.black));
+            if(position != 0)
+                swipeRight.setTextColor(getResources().getColor(R.color.black));
 
-        if(position != totalApartmentsInBuilding - 1)
-            swipeLeft.setTextColor(getResources().getColor(R.color.black));
+            if(position != totalApartmentsInBuilding - 1)
+                swipeLeft.setTextColor(getResources().getColor(R.color.black));
+        }
+
 
 
         String address = apartmentBriefDescription.getStreet()+" "+apartmentBriefDescription.getBuildingNumber()+", "+apartmentBriefDescription.getNeighborhood();
