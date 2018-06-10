@@ -149,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
     public AlertDialog.Builder buildDialogNotNetwork(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("אין חיבור אינטרנט");
-        builder.setMessage("אינטרנט אינו פועל. על מנת לחפש תדאג\\י לחיבור אינטרנט.");
+        builder.setMessage("אינטרנט אינו פועל. על מנת לחפש יש לוודא חיבור לאינטרנט.");
         builder.setPositiveButton("סגור", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

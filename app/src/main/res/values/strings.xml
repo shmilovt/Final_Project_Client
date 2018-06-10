@@ -30,11 +30,11 @@
     <string name="numberOfRooms">מספר חדרים</string>
     <string name="numberOfRoomates">מספר שותפים</string>
     <string name="furniture">ריהוט</string>
-    <string name="gardenCheck">גינה/חצר \u2714</string>
-    <string name="balconyCheck">מרפסת \u2714</string>
-    <string name="protectedSpaceCheck">מרחב מוגן \u2714</string>
-    <string name="animalsCheck">חיות \u2714</string>
-    <string name="warehouseCheck">מחסן \u2714</string>
+    <string name="gardenCheck">גינה/חצר</string>
+    <string name="balconyCheck">מרפסת</string>
+    <string name="protectedSpaceCheck">מרחב מוגן</string>
+    <string name="animalsCheck">חיות</string>
+    <string name="warehouseCheck">מחסן</string>
     <string name="costDTO">מחיר</string>
     <string name="floorDTO">קומה</string>
     <string name="sizeDTO">גודל דירה</string>
@@ -94,4 +94,5 @@
     <string name="dontHaveBalcony">אין מרפסת</string>
     <string name="sweptRightSign">\u25b6</string>
     <string name="sweptLeftSign">\u25c0</string>
+    <string name="alternativeResults">תוצאות אלטרנטיביות</string>
 </resources>
