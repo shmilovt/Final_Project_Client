@@ -103,6 +103,7 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         if (viewMode == 0) {
+           // mapViewFragment = new MapViewFragment();
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mapViewFragment).commit();
             btnMode.setText(getString(R.string.record_mode));
         } else {
@@ -117,6 +118,7 @@ public class ResultsActivity extends AppCompatActivity {
                 if (btnMode.getText().equals(getString(R.string.map_mode))) {
                     btnMode.setText(getString(R.string.record_mode));
                     viewMode = 0;
+                   // mapViewFragment = new MapViewFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, mapViewFragment);
                     transaction.commit();
@@ -331,7 +333,7 @@ public class ResultsActivity extends AppCompatActivity {
                 buildDialogNotNetwork(ResultsActivity.this).show();
             } else {
 
-                UserSearch userSearch = CategoriesManager.getInstance(this).convertToUserSearch();
+                UserSearch userSearch = CategoriesManager.getInstance().convertToUserSearch();
                 NetworkController.getInstance(this).getAlternativeApartments(userSearch, new NetworkListener<SearchResults>() {
                     @Override
                     public void getResult(SearchResults searchResults) {

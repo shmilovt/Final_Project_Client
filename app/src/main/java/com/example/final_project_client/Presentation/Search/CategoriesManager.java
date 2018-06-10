@@ -20,24 +20,23 @@ public class CategoriesManager {
     private int totalNumberOfCategories;
     private List<CategoryFragment> displayedCategories;
     private List<CategoryFragment> notDisplayedCategories;
-    private Context context;
     private static CategoriesManager INSTANCE = null;
     private boolean onFirstLaunch;
 
-    private CategoriesManager(Context context) {
+    private CategoriesManager() {
         numOfDisplayedCategories = 0;
         totalNumberOfCategories = 0;
         displayedCategories = new ArrayList<>();
         notDisplayedCategories = new ArrayList<>();
         onFirstLaunch = true;
-        this.context = context;
+
     }
 
-    public static CategoriesManager getInstance(Context context) {
+    public static CategoriesManager getInstance() {
         if (INSTANCE != null)
             return INSTANCE;
         else {
-            INSTANCE = new CategoriesManager(context);
+            INSTANCE = new CategoriesManager();
             return INSTANCE;
         }
     }
@@ -65,7 +64,7 @@ public class CategoriesManager {
         return categoriesNames;
     }
 
-    public void removeCategory(int categoryIndex) {
+    public void removeCategory(int categoryIndex, Context context) {
         CategoryFragment choosenCategory = displayedCategories.get(categoryIndex);
         choosenCategory.clearData();
         int lastPriorityBeforeRemove = numOfDisplayedCategories;
@@ -96,7 +95,7 @@ public class CategoriesManager {
 
     }
 
-    public void displayCategory(int categoryIndex) {
+    public void displayCategory(int categoryIndex , Context context) {
         CategoryFragment choosenCategory = notDisplayedCategories.get(categoryIndex);
         numOfDisplayedCategories++;
         notDisplayedCategories.remove(choosenCategory);
@@ -108,7 +107,7 @@ public class CategoriesManager {
     }
 
 
-    public void displayCategory(CategoryFragment categoryFragment) {
+    public void displayCategory(CategoryFragment categoryFragment, Context context) {
         CategoryFragment choosenCategory = null;
         for (CategoryFragment categoryFragment1 : notDisplayedCategories) {
             if (categoryFragment1.getName().equals(categoryFragment.getName()))
@@ -143,7 +142,7 @@ public class CategoriesManager {
         this.onFirstLaunch = onFirstLaunch;
     }
 
-    public void restoreCategories() {
+    public void restoreCategories(Context context) {
         int i = 0;
         for (CategoryFragment categoryFragment : displayedCategories) {
             ((Activity) context).getFragmentManager().beginTransaction().add(levels[i], categoryFragment).commit();
@@ -152,7 +151,4 @@ public class CategoriesManager {
 
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
 }

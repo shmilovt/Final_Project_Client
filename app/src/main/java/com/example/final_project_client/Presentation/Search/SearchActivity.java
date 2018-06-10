@@ -35,18 +35,17 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         NetworkController.getInstance(this);
-        categoriesManager = CategoriesManager.getInstance(SearchActivity.this);
+        categoriesManager = CategoriesManager.getInstance();
         if (categoriesManager.isOnFirstLaunch()) {
             initialCategories(categoriesManager);
 
 
-            categoriesManager.displayCategory(new NeighborhoodCategoryFragment());
-            categoriesManager.displayCategory(new CostCategoryFragment());
+            categoriesManager.displayCategory(new NeighborhoodCategoryFragment() , this);
+            categoriesManager.displayCategory(new CostCategoryFragment(), this);
             categoriesManager.setOnFirstLaunch(false);
         } else {
-            CategoriesManager.getInstance(this).setContext(this);
-            categoriesManager = CategoriesManager.getInstance(this);
-            categoriesManager.restoreCategories();
+            categoriesManager = CategoriesManager.getInstance();
+            categoriesManager.restoreCategories(this);
         }
 
     }
@@ -115,7 +114,7 @@ public class SearchActivity extends AppCompatActivity {
                 .setItems(inusedCategories, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        categoriesManager.removeCategory(which);
+                        categoriesManager.removeCategory(which, SearchActivity.this);
                     }
                 }).setNegativeButton("סגור", new DialogInterface.OnClickListener() {
             @Override
@@ -134,7 +133,7 @@ public class SearchActivity extends AppCompatActivity {
                 .setItems(unusedCategories, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        categoriesManager.displayCategory(which);
+                        categoriesManager.displayCategory(which, SearchActivity.this);
                     }
                 }).setNegativeButton("סגור", new DialogInterface.OnClickListener() {
             @Override

@@ -84,7 +84,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             @Override
             public void onClick() {
                 super.onClick();
-                if (indexOfDisplayedApartment >= 0 && apartmentIndexesOfMarker!=null) {
+                if (indexOfDisplayedApartment >= 0 && apartmentIndexesOfMarker != null) {
                     ((ResultsActivity) getActivity()).openApartmentFullDescription(apartmentIndexesOfMarker.get(indexOfDisplayedApartment));
 
                 }
@@ -113,6 +113,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     @Override
     public void onMapReady(GoogleMap googleMap) {
         System.out.println("mark index: " + indexOfDisplayedApartment);
+
         mMap = googleMap;
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -302,6 +303,38 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             apartmentIndexesOfMarker = null;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        gMapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        gMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        gMapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        gMapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        gMapView.onLowMemory();
+    }
+
+
 
 
 }
