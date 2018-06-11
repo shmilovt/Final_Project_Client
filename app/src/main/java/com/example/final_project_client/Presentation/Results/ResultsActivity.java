@@ -15,7 +15,6 @@ import android.app.FragmentTransaction;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
-import com.example.final_project_client.DTOs.SearchResultsDTO;
 import com.example.final_project_client.Presentation.FullDescription.ApartmentFullDescriptionActivity;
 import com.example.final_project_client.Presentation.FullDescription.ApartmentFullDescriptionActivityDataHolder;
 import com.example.final_project_client.Presentation.Search.CategoriesManager;
@@ -42,6 +41,9 @@ public class ResultsActivity extends AppCompatActivity {
     private int index;
     private int resultRecordsMode;
     private int viewMode;
+    private int numberOfNextResults;
+    private int numberOfPreviousResults;
+    private int numberOfCurrentResults;
 
 
     public ResultsActivity() {
@@ -55,7 +57,11 @@ public class ResultsActivity extends AppCompatActivity {
         index = DataHolder.getInstance().getIndex();
         resultRecords = DataHolder.getInstance().getResultRecords();
 
+
         if (DataHolder.getInstance().isOnFirstLaunch()) {
+            setNumberOfPreviousResults(0);
+            initialNumberOfNextResults();
+            initialNumberOfCurrentResults();
             viewMode = 0;
             resultRecordsMode = 0;
             mapViewFragment = new MapViewFragment();
@@ -75,56 +81,34 @@ public class ResultsActivity extends AppCompatActivity {
             resultRecordsMode = DataHolder.getInstance().getRessultRecordsMode();
             alternativeResultRecords = DataHolder.getInstance().getAlternativeRecords();
             mapViewFragment.updateData(this);
-
-            System.out.println("not first launch");
         }
         btnMode = findViewById(R.id.BtnMode);
         btnRecentlyResults = findViewById(R.id.BtnRecentlyResults);
         btnNextResults = findViewById(R.id.BtnNextResults);
 
-        if (resultRecordsMode == 0) {
-            if (index == 0) {
-                btnRecentlyResults.setEnabled(false);
-                btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
-            }
-            if (index + MaxDisplay >= resultRecords.length) {
-                btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-                btnNextResults.setText(R.string.alternativeResults);
-            }
-
-        } else {
-            btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-            btnRecentlyResults.setBackgroundResource(R.drawable.button_alternatives_background);
-            btnMode.setBackgroundResource(R.drawable.button_alternatives_background);
-            if (index + MaxDisplay >= alternativeResultRecords.length) {
-                btnNextResults.setEnabled(false);
-                btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
-            }
-        }
+        configButtons();
 
         if (viewMode == 0) {
-           // mapViewFragment = new MapViewFragment();
             getFragmentManager().beginTransaction().add(R.id.fragment_container, mapViewFragment).commit();
-            btnMode.setText(getString(R.string.record_mode));
         } else {
             getFragmentManager().beginTransaction().add(R.id.fragment_container, listViewFragment).commit();
-            btnMode.setText(getString(R.string.map_mode));
         }
 
 
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btnMode.getText().equals(getString(R.string.map_mode))) {
-                    btnMode.setText(getString(R.string.record_mode));
+                if (viewMode == 1) {
+                    String btnName = getResources().getString(R.string.record_mode) + "\n(" + numberOfCurrentResults + ")";
+                    btnMode.setText(btnName);
                     viewMode = 0;
-                   // mapViewFragment = new MapViewFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, mapViewFragment);
                     transaction.commit();
 
                 } else {
-                    btnMode.setText(getString(R.string.map_mode));
+                    String btnName = getResources().getString(R.string.map_mode) + "\n(" + numberOfCurrentResults + ")";
+                    btnMode.setText(btnName);
                     viewMode = 1;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, listViewFragment);
@@ -133,6 +117,25 @@ public class ResultsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initialNumberOfCurrentResults() {
+        if (index + MaxDisplay <= resultRecords.length)
+            numberOfCurrentResults = MaxDisplay;
+        else {
+            numberOfCurrentResults = resultRecords.length - index;
+        }
+    }
+
+    private void initialNumberOfNextResults() {
+        if (resultRecords.length <= MaxDisplay)
+            setNumberOfNextResults(0);
+        else
+            setNumberOfNextResults(resultRecords.length - MaxDisplay);
+    }
+
+    private void setNumberOfNextResults(int numberOfNextResults) {
+        this.numberOfNextResults = numberOfNextResults;
     }
 
 
@@ -144,18 +147,7 @@ public class ResultsActivity extends AppCompatActivity {
             if (index + MaxDisplay < resultRecords.length) {
                 index = index + MaxDisplay;
                 updateViews();
-                if (index + MaxDisplay >= resultRecords.length) {
-                    btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-                    btnNextResults.setText(R.string.alternativeResults);
-                } else {
-                    btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
-                }
 
-
-                if (index - MaxDisplay >= 0) {
-                    btnRecentlyResults.setEnabled(true);
-                    btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
-                }
             } else {
 
                 if (alternativeResultRecords == null) {
@@ -170,15 +162,29 @@ public class ResultsActivity extends AppCompatActivity {
             if (index + MaxDisplay < alternativeResultRecords.length) {
                 index = index + MaxDisplay;
                 updateViews();
-
-                if (index + MaxDisplay >= alternativeResultRecords.length) {
-                    btnNextResults.setEnabled(false);
-                    btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
-                }
-
             }
         }
 
+
+        configButtons();
+
+
+    }
+
+    private void calcNumberOfCurrentResults() {
+        if (resultRecordsMode == 0) {
+            if (index + MaxDisplay <= resultRecords.length)
+                numberOfCurrentResults = MaxDisplay;
+            else {
+                numberOfCurrentResults = resultRecords.length - index;
+            }
+        } else if (resultRecordsMode == 1) {
+            if (index + MaxDisplay <= alternativeResultRecords.length)
+                numberOfCurrentResults = MaxDisplay;
+            else {
+                numberOfCurrentResults = alternativeResultRecords.length - index;
+            }
+        }
     }
 
     private void updateViews() {
@@ -193,52 +199,125 @@ public class ResultsActivity extends AppCompatActivity {
         if (resultRecordsMode == 0) {
             if (index - MaxDisplay >= 0) {
                 index = index - MaxDisplay;
+
                 updateViews();
-
-                if (index - MaxDisplay < 0) {
-                    btnRecentlyResults.setEnabled(false);
-                    btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
-                }
-
-                if (index + MaxDisplay <= resultRecords.length) {
-                    btnNextResults.setEnabled(true);
-                    btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
-                    btnNextResults.setText(R.string.NextResults);
-                }
             }
 
         } else if (resultRecordsMode == 1) {
             if (index - MaxDisplay >= 0) {
                 index = index - MaxDisplay;
-
-
-                if (index + MaxDisplay <= alternativeResultRecords.length) {
-                    btnNextResults.setEnabled(true);
-                    btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-                }
             } else {
 
-                btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-                btnNextResults.setText(R.string.alternativeResults);
-                btnMode.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+
                 if (resultRecords.length <= MaxDisplay)
                     index = 0;
                 else {
                     index = resultRecords.length - resultRecords.length % MaxDisplay;
                 }
                 resultRecordsMode = 1 - resultRecordsMode;
-                if (index - MaxDisplay < 0) {
-                    btnRecentlyResults.setEnabled(false);
-                    btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
-                } else {
-                    btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
-                }
-
-                btnNextResults.setEnabled(true);
-
 
             }
             updateViews();
+        }
+
+
+        configButtons();
+    }
+
+    private void configButtons() {
+        calcNumberOfNextResults();
+        calcNumberOfPreviousResults();
+        calcNumberOfCurrentResults();
+
+        String btnName = getResources().getString(R.string.NextResults) + "\n(" + numberOfNextResults + ")";
+        btnNextResults.setText(btnName);
+        btnName = getResources().getString(R.string.RecentlyResults) + "\n(" + numberOfPreviousResults + ")";
+        btnRecentlyResults.setText(btnName);
+
+        if(viewMode == 0){
+            btnName = getResources().getString(R.string.record_mode) + "\n(" + numberOfCurrentResults + ")";
+            btnMode.setText(btnName);
+        }
+        else if(viewMode == 1){
+            btnName = getResources().getString(R.string.map_mode) + "\n(" + numberOfCurrentResults + ")";
+            btnMode.setText(btnName);
+        }
+
+        if (resultRecordsMode == 0) {
+
+            btnMode.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+            btnNextResults.setEnabled(true);
+
+            if (index == 0) {
+                btnRecentlyResults.setEnabled(false);
+                btnRecentlyResults.setBackgroundResource(R.drawable.enabled_false_background);
+            } else {
+                btnRecentlyResults.setEnabled(true);
+                btnRecentlyResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+            }
+
+            if (index + MaxDisplay < resultRecords.length) {
+                btnNextResults.setBackgroundResource(R.drawable.regular_next_previous_button_background);
+                btnName = getResources().getString(R.string.NextResults) + "\n(" + numberOfNextResults + ")";
+                btnNextResults.setText(btnName);
+            } else {
+
+                btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
+                btnName = getResources().getString(R.string.alternativeResults) + "\n(" + numberOfNextResults + ")";
+                btnNextResults.setText(btnName);
+
+            }
+
+
+        } else if (resultRecordsMode == 1) {
+
+            btnMode.setBackgroundResource(R.drawable.button_alternatives_background);
+            btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
+            btnRecentlyResults.setBackgroundResource(R.drawable.button_alternatives_background);
+            btnRecentlyResults.setEnabled(true);
+
+            if (index + MaxDisplay < alternativeResultRecords.length) {
+                btnNextResults.setEnabled(true);
+                btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
+            } else {
+                btnNextResults.setEnabled(false);
+                btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
+            }
+        }
+    }
+
+    private void calcNumberOfNextResults() {
+        if (resultRecordsMode == 0) {
+            if (alternativeResultRecords != null) {
+                if (index + MaxDisplay >= resultRecords.length) {
+                    numberOfNextResults = alternativeResultRecords.length;
+                } else {
+                    numberOfNextResults = resultRecords.length - (index + MaxDisplay) + alternativeResultRecords.length;
+                }
+            } else {
+                if (index + MaxDisplay >= resultRecords.length)
+                    numberOfNextResults = 0;
+                else {
+                    numberOfNextResults = resultRecords.length - (index + MaxDisplay);
+                }
+            }
+        } else if (resultRecordsMode == 1) {
+            if (index + MaxDisplay >= alternativeResultRecords.length)
+                numberOfNextResults = 0;
+            else {
+                numberOfNextResults = alternativeResultRecords.length - (index + MaxDisplay);
+            }
+
+        }
+    }
+
+    private void calcNumberOfPreviousResults() {
+        if (resultRecordsMode == 0) {
+
+            numberOfPreviousResults = index;
+        } else if (resultRecordsMode == 1) {
+
+            numberOfPreviousResults = index + resultRecords.length;
         }
     }
 
@@ -493,18 +572,15 @@ public class ResultsActivity extends AppCompatActivity {
         if (alternativeResultRecords.length == 0) {
             buildDialogNoAlternativeResults(ResultsActivity.this).show();
         } else {
-            btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-            btnNextResults.setText(R.string.NextResults);
-            btnRecentlyResults.setBackgroundResource(R.drawable.button_alternatives_background);
-            btnMode.setBackgroundResource(R.drawable.button_alternatives_background);
             index = 0;
             resultRecordsMode = 1 - resultRecordsMode;
-            btnRecentlyResults.setEnabled(true);
             updateViews();
-            if (index + MaxDisplay >= alternativeResultRecords.length) {
-                btnNextResults.setEnabled(false);
-                btnNextResults.setBackgroundResource(R.drawable.enabled_false_background);
-            }
+            configButtons();
         }
     }
+
+    public void setNumberOfPreviousResults(int numberOfPreviousResults) {
+        this.numberOfPreviousResults = numberOfPreviousResults;
+    }
 }
+

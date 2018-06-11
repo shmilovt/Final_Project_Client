@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.final_project_client.R;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -35,6 +37,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     private BriefDescriptionFragment briefDescriptionFragment;
     private FrameLayout briefDescriptionsFrame;
     private Map<Marker, List<Integer>> map;
+    private boolean firstLaunch;
 
 
     public MapViewFragment() {
@@ -44,6 +47,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     @Override
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
+        firstLaunch = true;
 
     }
 
@@ -115,6 +119,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
         System.out.println("mark index: " + indexOfDisplayedApartment);
 
         mMap = googleMap;
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -177,6 +182,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             }
         });
 
+
         ((ResultsActivity) getActivity()).getData(this);
 
    /*    if (briefDescriptionFragment != null && indexOfDisplayedApartment >= 0 && apartmentIndexesOfMarker != null && chosenMarker!=null) {
@@ -187,9 +193,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
            // setMarkerHasChoosen(chosenMarker, true);
         }  */
 
-        LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(BeershebaCenter));
-        mMap.setMinZoomPreference(12.9f);
+
     }
 
 
@@ -228,8 +232,29 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 map.put(marker, indexes);
             }
         }
+        if (firstLaunch) {
+            LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter , 12.9f ));
+            firstLaunch = false;
+        }
+        else{
+            if (map.keySet().size() >= 3) {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (Marker marker : map.keySet()) {
+                    builder.include(marker.getPosition());
+                }
+                LatLngBounds bounds = builder.build();
+                int padding = 150; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                mMap.animateCamera(cu);
 
+            } else {
+                LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter , 12.9f ));
 
+            }
+
+        }
     }
 
     public void returnFromListMode() {
@@ -333,8 +358,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
         super.onLowMemory();
         gMapView.onLowMemory();
     }
-
-
 
 
 }
