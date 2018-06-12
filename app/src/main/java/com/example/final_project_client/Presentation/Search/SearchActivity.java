@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ScrollView;
 
 import com.example.final_project_client.Communication.NetworkController;
 import com.example.final_project_client.Communication.NetworkListener;
@@ -23,6 +24,7 @@ import com.example.final_project_client.UserSearchingUtils.UserSearch;
 public class SearchActivity extends AppCompatActivity {
 
     private CategoriesManager categoriesManager;
+    private ScrollView scrollView;
 
 
     public SearchActivity() {
@@ -34,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        scrollView = findViewById(R.id.scrollView);
         NetworkController.getInstance(this);
         categoriesManager = CategoriesManager.getInstance();
         if (categoriesManager.isOnFirstLaunch()) {
@@ -134,6 +137,11 @@ public class SearchActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         categoriesManager.displayCategory(which, SearchActivity.this);
+                        scrollView.postDelayed(new Runnable() {
+                            public void run() {
+                                scrollView.fullScroll(View.FOCUS_DOWN);
+                            }
+                        } , 50);
                     }
                 }).setNegativeButton("סגור", new DialogInterface.OnClickListener() {
             @Override

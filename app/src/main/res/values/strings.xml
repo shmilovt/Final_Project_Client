@@ -21,8 +21,8 @@
     <string name="hyphen">\u2010</string>
     <string name="maximal_floor">קומה מקסימלית</string>
     <string name="minimal_floor">קומה התחלתית</string>
-    <string name="addCategory">הוספה</string>
-    <string name="RemoveCategory">הסרה</string>
+    <string name="addCategory">הוספת קטגוריה</string>
+    <string name="RemoveCategory">הסרת קטגוריה</string>
     <string name="neighborhood">שכונה</string>
     <string name="minimal_size">גודל מינימלי</string>
     <string name="maximal_size">גודל מקסימלי</string>
@@ -95,4 +95,6 @@
     <string name="sweptRightSign">\u25b6</string>
     <string name="sweptLeftSign">\u25c0</string>
     <string name="alternativeResults">תוצאות אלטרנטיבות</string>
+    <string name="searchApartments">חיפוש דירות</string>
+    <string name="searchApartmentActivityExplanation">\u2022יש לבחור קטגוריות על פי סדר עדיפויות\u2022</string>
 </resources>
