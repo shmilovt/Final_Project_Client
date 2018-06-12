@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -27,16 +28,14 @@ import java.util.Map;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback, ResultsView {
 
-
-    private MapView gMapView;
-    private Marker chosenMarker;
-    private GoogleMap mMap;
     private View mView;
+    private MapView gMapView;
+    private GoogleMap mMap;
+    private Map<Marker, List<Integer>> map;
+    private Marker chosenMarker;
     private int indexOfDisplayedApartment;
     private List<Integer> apartmentIndexesOfMarker;
     private BriefDescriptionFragment briefDescriptionFragment;
-    private FrameLayout briefDescriptionsFrame;
-    private Map<Marker, List<Integer>> map;
     private boolean firstLaunch;
 
 
@@ -48,6 +47,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
         firstLaunch = true;
+        chosenMarker = null;
 
     }
 
@@ -56,7 +56,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.map_view, container, false);
-        chosenMarker = null;
         return mView;
 
     }
@@ -65,7 +64,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gMapView = (MapView) mView.findViewById(R.id.map);
-        briefDescriptionsFrame = (FrameLayout) mView.findViewById(R.id.briefDescriptionsFrame);
+        FrameLayout briefDescriptionsFrame = (FrameLayout) mView.findViewById(R.id.briefDescriptionsFrame);
         briefDescriptionsFrame.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             public void onSwipeTop() {
 
@@ -117,9 +116,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
     @Override
     public void onMapReady(GoogleMap googleMap) {
         System.out.println("mark index: " + indexOfDisplayedApartment);
-
         mMap = googleMap;
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -145,8 +142,8 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                     if (apartmentIndexesOfMarker != null && apartmentIndexesOfMarker.size() >= 1) {
                         System.out.println("item = " + apartmentIndexesOfMarker.get(indexOfDisplayedApartment));
                         int index = apartmentIndexesOfMarker.get(indexOfDisplayedApartment);
-                        ApartmentBriefDescription apartmentBriefDescription = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
-                        BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription, indexOfDisplayedApartment, apartmentIndexesOfMarker.size());
+                        ApartmentBriefDescription apartmentBriefDescription1 = ((ResultsActivity) getActivity()).getApartmentBriefDescription(index);
+                        BriefDescriptionFragment newBriefDescriptionFragment = BriefDescriptionFragment.getInstance(apartmentBriefDescription1, indexOfDisplayedApartment, apartmentIndexesOfMarker.size());
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         if (briefDescriptionFragment == null) {
                             briefDescriptionFragment = newBriefDescriptionFragment;
@@ -184,14 +181,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
 
 
         ((ResultsActivity) getActivity()).getData(this);
-
-   /*    if (briefDescriptionFragment != null && indexOfDisplayedApartment >= 0 && apartmentIndexesOfMarker != null && chosenMarker!=null) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.remove(briefDescriptionFragment);
-            transaction.add(R.id.briefDescriptionsFrame, briefDescriptionFragment);
-            transaction.commit();
-           // setMarkerHasChoosen(chosenMarker, true);
-        }  */
 
 
     }
@@ -232,12 +221,24 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 map.put(marker, indexes);
             }
         }
+
         if (firstLaunch) {
-            LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter , 12.9f ));
+            if (map.keySet().size() >= 3) {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (Marker marker : map.keySet()) {
+                    builder.include(marker.getPosition());
+                }
+                LatLngBounds bounds = builder.build();
+                int padding = 150; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                mMap.moveCamera(cu);
+
+            } else {
+                LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter, 12.9f));
+            }
             firstLaunch = false;
-        }
-        else{
+        } else {
             if (map.keySet().size() >= 3) {
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 for (Marker marker : map.keySet()) {
@@ -250,19 +251,15 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
 
             } else {
                 LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter , 12.9f ));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter, 12.9f));
 
             }
 
         }
     }
 
-    public void returnFromListMode() {
-        setMarkerHasChoosen(chosenMarker, false);
 
-    }
-
-    public void setMarkerHasChoosen(Marker marker, boolean isChoosen) {
+    public Marker setMarkerHasChoosen(Marker marker, boolean isChoosen) {
         if (marker != null) {
             Marker newMarker;
             List<Integer> indexes;
@@ -275,6 +272,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                         .position(new LatLng(marker.getPosition().latitude, marker.getPosition().longitude))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                 map.put(newMarker, indexes);
+                return newMarker;
 
             } else {
                 chosenMarker = null;
@@ -285,7 +283,9 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                         .position(new LatLng(marker.getPosition().latitude, marker.getPosition().longitude)));
                 map.put(newMarker, indexes);
             }
+
         }
+        return null;
     }
 
     public void nextApartmentBrief() {
@@ -326,6 +326,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             briefDescriptionFragment = null;
             indexOfDisplayedApartment = -1;
             apartmentIndexesOfMarker = null;
+            setMarkerHasChoosen(chosenMarker, false);
         }
     }
 

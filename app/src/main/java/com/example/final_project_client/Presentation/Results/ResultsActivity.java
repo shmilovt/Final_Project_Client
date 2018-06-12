@@ -98,8 +98,9 @@ public class ResultsActivity extends AppCompatActivity {
         btnMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String btnName;
                 if (viewMode == 1) {
-                    String btnName = getResources().getString(R.string.record_mode) + "\n(" + numberOfCurrentResults + ")";
+                    btnName = getResources().getString(R.string.record_mode) + "\n(" + numberOfCurrentResults + ")";
                     btnMode.setText(btnName);
                     viewMode = 0;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -107,7 +108,7 @@ public class ResultsActivity extends AppCompatActivity {
                     transaction.commit();
 
                 } else {
-                    String btnName = getResources().getString(R.string.map_mode) + "\n(" + numberOfCurrentResults + ")";
+                    btnName = getResources().getString(R.string.map_mode) + "\n(" + numberOfCurrentResults + ")";
                     btnMode.setText(btnName);
                     viewMode = 1;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -225,20 +226,20 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void configButtons() {
+        String btnName;
         calcNumberOfNextResults();
         calcNumberOfPreviousResults();
         calcNumberOfCurrentResults();
 
-        String btnName = getResources().getString(R.string.NextResults) + "\n(" + numberOfNextResults + ")";
+        btnName = getResources().getString(R.string.NextResults) + "\n(" + numberOfNextResults + ")";
         btnNextResults.setText(btnName);
         btnName = getResources().getString(R.string.RecentlyResults) + "\n(" + numberOfPreviousResults + ")";
         btnRecentlyResults.setText(btnName);
 
-        if(viewMode == 0){
+        if (viewMode == 0) {
             btnName = getResources().getString(R.string.record_mode) + "\n(" + numberOfCurrentResults + ")";
             btnMode.setText(btnName);
-        }
-        else if(viewMode == 1){
+        } else if (viewMode == 1) {
             btnName = getResources().getString(R.string.map_mode) + "\n(" + numberOfCurrentResults + ")";
             btnMode.setText(btnName);
         }
@@ -263,7 +264,11 @@ public class ResultsActivity extends AppCompatActivity {
             } else {
 
                 btnNextResults.setBackgroundResource(R.drawable.button_alternatives_background);
-                btnName = getResources().getString(R.string.alternativeResults) + "\n(" + numberOfNextResults + ")";
+                if (alternativeResultRecords != null)
+                    btnName = getResources().getString(R.string.alternativeResults) + "\n(" + numberOfNextResults + ")";
+                else{
+                    btnName = getResources().getString(R.string.alternativeResults);
+                }
                 btnNextResults.setText(btnName);
 
             }
@@ -575,8 +580,8 @@ public class ResultsActivity extends AppCompatActivity {
             index = 0;
             resultRecordsMode = 1 - resultRecordsMode;
             updateViews();
-            configButtons();
         }
+        configButtons();
     }
 
     public void setNumberOfPreviousResults(int numberOfPreviousResults) {
