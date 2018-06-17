@@ -129,10 +129,17 @@ public class ReportActivity extends AppCompatActivity {
                     if (content != null) {
                         System.out.println(content);
                         Report report = new Report(apartmentID, field, content);
-                        sendReport(report);
+                        if(!ReportStorage.getInstance().isReportExist(report)){
+                            sendReport(report);
+                        }
+                        else{
+
+                            buildDialogTransactionNotComplete(ReportActivity.this,"הצעה זו כבר נשלחה!"  , "אין לשלוח הצעות זהות.").show();
+
+                        }
                     } else {
 
-                        buildDialogNotFillFields(ReportActivity.this).show();
+                        buildDialogTransactionNotComplete(ReportActivity.this,"לא נשלח"  , "יש להקפיד למלא לפחות שדה מילוי אחד!").show();
 
                     }
                 }
@@ -141,7 +148,7 @@ public class ReportActivity extends AppCompatActivity {
     }
 
 
-    public synchronized void sendReport(Report report) {
+    public synchronized void sendReport(final Report report) {
 
         if (!hasNetwork()) {
             buildDialogNotNetwork(ReportActivity.this).show();
@@ -152,6 +159,7 @@ public class ReportActivity extends AppCompatActivity {
                 public void getResult(String response) {
 
                     buildDialogSuccess(ReportActivity.this).show();
+                    ReportStorage.getInstance().addReport(report);
 
                 }
             }, new NetworkListener<String>() {
@@ -217,10 +225,10 @@ public class ReportActivity extends AppCompatActivity {
     }
 
 
-    public AlertDialog.Builder buildDialogNotFillFields(final Context context) {
+    public AlertDialog.Builder buildDialogTransactionNotComplete(final Context context, String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("לא נשלח");
-        builder.setMessage("יש להקפיד למלא לפחות שדה מילוי אחד!");
+        builder.setTitle(title);
+        builder.setMessage(message);
         builder.setPositiveButton("סגור", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

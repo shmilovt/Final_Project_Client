@@ -25,6 +25,7 @@ import java.util.Map;
  */
 
 public class NetworkController implements CommunicationInterface {
+    //132.72.42.28
     private static final String URL = "https://final-project-server.azurewebsites.net";
     private static NetworkController INSTANCE = null;
     private RequestQueue queue = null;

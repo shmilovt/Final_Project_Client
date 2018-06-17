@@ -248,13 +248,10 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 int padding = 150; // offset from edges of the map in pixels
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                 mMap.animateCamera(cu);
-
             } else {
                 LatLng BeershebaCenter = new LatLng(31.25181, 34.7913);
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(BeershebaCenter, 12.9f));
-
             }
-
         }
     }
 
@@ -299,7 +296,6 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
             transaction.replace(R.id.briefDescriptionsFrame, newBriefDescriptionFragment);
             transaction.commit();
         }
-
     }
 
 
