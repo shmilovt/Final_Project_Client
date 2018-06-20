@@ -220,6 +220,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback, Res
                 indexes.add(i);
                 map.put(marker, indexes);
             }
+
         }
 
         if (firstLaunch) {

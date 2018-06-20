@@ -40,7 +40,7 @@ public class ReportActivity extends AppCompatActivity {
         sourceText.setText(intent.getExtras().getString(ApartmentFullDescriptionActivity.SOURCE_TEXT));
         field = (new Gson()).fromJson(intent.getExtras().getString(ApartmentFullDescriptionActivity.CATEGORY), Field.class);
         reportCategoryTitle = (TextView) findViewById(R.id.categoryReportTitleTxt);
-        reportActivityFieldTitle = (TextView)findViewById(R.id.reportActivityFieldTitle);
+        reportActivityFieldTitle = (TextView) findViewById(R.id.reportActivityFieldTitle);
 
         switch (field) {
             case furniture:
@@ -61,19 +61,19 @@ public class ReportActivity extends AppCompatActivity {
                 reportFragment = costReportFragment;
                 (getSupportFragmentManager().beginTransaction()).add(R.id.reportForm, costReportFragment).commit();
                 break;
-            case apartmentSize:
+            case size:
                 reportActivityFieldTitle.setText(R.string.size);
                 SizeReportFragment sizeReportFragment = new SizeReportFragment();
                 reportFragment = sizeReportFragment;
                 (getSupportFragmentManager().beginTransaction()).add(R.id.reportForm, sizeReportFragment).commit();
                 break;
-            case numRooms:
+            case numOfRooms:
                 reportActivityFieldTitle.setText(R.string.rooms);
                 RoomsReportFragment roomsReportFragment = new RoomsReportFragment();
                 reportFragment = roomsReportFragment;
                 (getSupportFragmentManager().beginTransaction()).add(R.id.reportForm, roomsReportFragment).commit();
                 break;
-            case yard:
+            case garden:
                 reportActivityFieldTitle.setText(R.string.gardenFullDescription);
                 GardenReportFragment gardenReportFragment = new GardenReportFragment();
                 reportFragment = gardenReportFragment;
@@ -97,13 +97,13 @@ public class ReportActivity extends AppCompatActivity {
                 reportFragment = addressReportFragment;
                 (getSupportFragmentManager().beginTransaction()).add(R.id.reportForm, addressReportFragment).commit();
                 break;
-            case animals:
+            case animal:
                 reportActivityFieldTitle.setText(R.string.animalsFullDescription);
                 AnimalsReportFragment animalsReportFragment = new AnimalsReportFragment();
                 reportFragment = animalsReportFragment;
                 (getFragmentManager().beginTransaction()).add(R.id.reportForm, animalsReportFragment).commit();
                 break;
-            case numRoomates:
+            case numberOfMates:
                 reportActivityFieldTitle.setText(R.string.roomates);
                 RoomatesReportFragment roomatesReportFragment = new RoomatesReportFragment();
                 reportFragment = roomatesReportFragment;
@@ -129,18 +129,15 @@ public class ReportActivity extends AppCompatActivity {
                     if (content != null) {
                         System.out.println(content);
                         Report report = new Report(apartmentID, field, content);
-                        if(!ReportStorage.getInstance().isReportExist(report)){
+                        if (!ReportStorage.getInstance().isReportExist(report)) {
                             sendReport(report);
-                        }
-                        else{
+                        } else {
 
-                            buildDialogTransactionNotComplete(ReportActivity.this,"הצעה זו כבר נשלחה!"  , "אין לשלוח הצעות זהות.").show();
+                            buildDialogTransactionNotComplete(ReportActivity.this, "הצעה זו כבר נשלחה!", "אין לשלוח הצעות זהות.").show();
 
                         }
                     } else {
-
-                        buildDialogTransactionNotComplete(ReportActivity.this,"לא נשלח"  , "יש להקפיד למלא לפחות שדה מילוי אחד!").show();
-
+                        buildDialogTransactionNotComplete(ReportActivity.this, "לא נשלח", "יש להקפיד למלא לפחות שדה מילוי אחד!").show();
                     }
                 }
             }
@@ -265,4 +262,5 @@ public class ReportActivity extends AppCompatActivity {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
 }

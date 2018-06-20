@@ -2,7 +2,7 @@ package com.example.final_project_client.DTOs;
 
 public class AddressDTO {
     private String street;
-    private Integer numOfBuilding;
+    private int numOfBuilding;
     private String neighborhood;
 
     public AddressDTO(){}
@@ -21,11 +21,11 @@ public class AddressDTO {
         this.street = street;
     }
 
-    public Integer getNumOfBuilding() {
+    public int getNumOfBuilding() {
         return numOfBuilding;
     }
 
-    public void setNumOfBuilding(Integer numOfBuilding) {
+    public void setNumOfBuilding(int numOfBuilding) {
         this.numOfBuilding = numOfBuilding;
     }
 

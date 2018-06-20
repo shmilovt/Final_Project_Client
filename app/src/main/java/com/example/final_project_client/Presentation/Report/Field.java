@@ -2,18 +2,18 @@ package com.example.final_project_client.Presentation.Report;
 
 public enum Field{
         //double:
-        numRooms,
-        apartmentSize,
+        numOfRooms,
+        size,
 
         //int:
-        numRoomates,
+        numberOfMates,
         cost,
         floor,
         furniture,
         balcony,
-        animals,
+        animal,
         protectedSpace,
-        yard,
+        garden,
         warehouse,
 
         address

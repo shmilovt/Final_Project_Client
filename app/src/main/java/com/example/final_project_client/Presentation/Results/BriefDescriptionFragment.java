@@ -75,9 +75,14 @@ public class BriefDescriptionFragment extends Fragment {
                 swipeLeft.setTextColor(getResources().getColor(R.color.black));
         }
 
+        String address;
+        if(apartmentBriefDescription.getNeighborhood().equals("")){
+            address = apartmentBriefDescription.getStreet()+" "+apartmentBriefDescription.getBuildingNumber();
+        }
+        else{
+            address = apartmentBriefDescription.getStreet()+" "+apartmentBriefDescription.getBuildingNumber()+", "+apartmentBriefDescription.getNeighborhood();
+        }
 
-
-        String address = apartmentBriefDescription.getStreet()+" "+apartmentBriefDescription.getBuildingNumber()+", "+apartmentBriefDescription.getNeighborhood();
         int cost = apartmentBriefDescription.getCost();
         String costString;
         if (cost >= 0) {
@@ -86,6 +91,8 @@ public class BriefDescriptionFragment extends Fragment {
             costString = "-";
             sheqelTxt.setText("");
         }
+
+
 
         double numberOfRooms = apartmentBriefDescription.getNumberOfRooms();
         String numberOfRoomsString;

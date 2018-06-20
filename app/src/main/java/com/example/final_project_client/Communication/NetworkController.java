@@ -72,13 +72,14 @@ public class NetworkController implements CommunicationInterface {
             }
         };
 
+        System.out.println(stringRequest.getUrl());
         queue.add(stringRequest);
     }
 
     @Override
     public synchronized void searchApartments(final UserSearch userSearch, final NetworkListener<SearchResults> listener, final NetworkListener<String> errorListener) {
         long time = System.nanoTime();
-        if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
+        if ((time - lastTimeRequestSend) / 1000000 >= TimeBetweenRequestsMS) {
             String fullURL = URL + "/searchApartments";
             UserSearchDTO userSearchDTO = new UserSearchDTO(userSearch);
             final String jsonString = UserSearchDTO.toJSON(userSearchDTO);
@@ -88,13 +89,13 @@ public class NetworkController implements CommunicationInterface {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                                SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
-                                SearchResults searchResults = new SearchResults(searchResultsDTO);
-                                Gson gson = new Gson();
-                                String strResults = gson.toJson(searchResults);
-                                System.out.println(strResults);
-                                listener.getResult(searchResults);
-                            }
+                            SearchResultsDTO searchResultsDTO = SearchResultsDTO.fromJSON(response);
+                            SearchResults searchResults = new SearchResults(searchResultsDTO);
+                            Gson gson = new Gson();
+                            String strResults = gson.toJson(searchResults);
+                            System.out.println(strResults);
+                            listener.getResult(searchResults);
+                        }
 
 
                     },
@@ -103,9 +104,8 @@ public class NetworkController implements CommunicationInterface {
                         public void onErrorResponse(VolleyError error) {
 
 
-                                errorListener.getResult(error.toString());
-                            }
-
+                            errorListener.getResult(error.toString());
+                        }
 
 
                     }
@@ -118,20 +118,18 @@ public class NetworkController implements CommunicationInterface {
                 }
             };
 
-
+            System.out.println(stringRequest.getUrl());
             stringRequest.setShouldCache(false);
             queue.add(stringRequest);
             lastTimeRequestSend = System.nanoTime();
-            }
-
-
         }
+    }
 
 
     @Override
     public synchronized void getAlternativeApartments(final UserSearch userSearch, final NetworkListener<SearchResults> listener, final NetworkListener<String> errorListener) {
         long time = System.nanoTime();
-        if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
+        if ((time - lastTimeRequestSend) / 1000000 >= TimeBetweenRequestsMS) {
             String fullURL = URL + "/moreResults";
             UserSearchDTO userSearchDTO = new UserSearchDTO(userSearch);
             final String jsonString = UserSearchDTO.toJSON(userSearchDTO);
@@ -160,7 +158,6 @@ public class NetworkController implements CommunicationInterface {
                         }
 
 
-
                     }
             ) {
                 @Override
@@ -172,6 +169,7 @@ public class NetworkController implements CommunicationInterface {
             };
 
 
+            System.out.println(stringRequest.getUrl());
             stringRequest.setShouldCache(false);
             queue.add(stringRequest);
             lastTimeRequestSend = System.nanoTime();
@@ -183,7 +181,7 @@ public class NetworkController implements CommunicationInterface {
     public void sendReport(Report report, final NetworkListener<String> listener, final NetworkListener<String> errorListener) {
 
         long time = System.nanoTime();
-        if ((time - lastTimeRequestSend)/1000000 >= TimeBetweenRequestsMS) {
+        if ((time - lastTimeRequestSend) / 1000000 >= TimeBetweenRequestsMS) {
             String fullURL = URL + "/addUserReport";
             ReportDTO reportDTO = new ReportDTO(report);
             final String jsonString = ReportDTO.toJSON(reportDTO);
@@ -208,7 +206,6 @@ public class NetworkController implements CommunicationInterface {
                         }
 
 
-
                     }
             ) {
                 @Override
@@ -219,7 +216,7 @@ public class NetworkController implements CommunicationInterface {
                 }
             };
 
-
+            System.out.println(stringRequest.getUrl());
             stringRequest.setShouldCache(false);
             queue.add(stringRequest);
             lastTimeRequestSend = System.nanoTime();

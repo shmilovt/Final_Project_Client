@@ -83,11 +83,11 @@ public class AddressReportFragment extends Fragment implements ReportFragment {
             streetContentString = null;
 
         String buildingNumberContentString = buildingNumberContent.getText().toString();
-        Integer buidingNumberContentInteger;
+        int buidingNumberContentInteger;
         try {
             buidingNumberContentInteger = Integer.parseInt(buildingNumberContentString);
         } catch (NumberFormatException e) {
-            buidingNumberContentInteger = null;
+            buidingNumberContentInteger = -1;
         }
 
         String neighborhoodContentString;
@@ -98,11 +98,10 @@ public class AddressReportFragment extends Fragment implements ReportFragment {
             neighborhoodContentString = neighborhoodContentSpinner.getSelectedItem().toString();
         if (streetContentString != null)
             System.out.println(streetContentString);
-        if (buidingNumberContentInteger != null)
             System.out.println(buidingNumberContentInteger);
         if (neighborhoodContentString != null)
             System.out.println(neighborhoodContentString);
-        if (buidingNumberContentInteger != null || neighborhoodContentString != null || streetContentString != null) {
+        if (buidingNumberContentInteger != -1 || neighborhoodContentString != null || streetContentString != null) {
             AddressDTO addressDTO = new AddressDTO(streetContentString, buidingNumberContentInteger, neighborhoodContentString);
             return new Gson().toJson(addressDTO);
         } else {

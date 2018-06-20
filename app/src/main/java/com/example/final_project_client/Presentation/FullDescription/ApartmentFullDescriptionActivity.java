@@ -73,7 +73,13 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         sourceText.setText(resultRecord.getText());
 
         addressTxt = (TextView) findViewById(R.id.addressTxt);
-        String address = resultRecord.getStreet() + " " + resultRecord.getNumber() + ", " + resultRecord.getNeighborhood();
+        String address;
+        if(resultRecord.getNeighborhood().equals("")){
+            address = resultRecord.getStreet()+" "+resultRecord.getNumber();
+        }
+        else{
+            address = resultRecord.getStreet()+" "+resultRecord.getNumber()+", "+resultRecord.getNeighborhood();
+        }
         addressTxt.setText(address);
 
         floorTxt = (TextView) findViewById(R.id.floorTxt);
@@ -279,7 +285,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editRoomsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(Field.numRooms);
+                startReportActivity(Field.numOfRooms);
             }
         });
 
@@ -287,7 +293,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editSizeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(Field.apartmentSize);
+                startReportActivity(Field.size);
             }
         });
 
@@ -295,7 +301,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editRoomatesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(Field.numRoomates);
+                startReportActivity(Field.numberOfMates);
             }
         });
 
@@ -303,7 +309,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editAnimalsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(Field.animals);
+                startReportActivity(Field.animal);
             }
         });
 
@@ -328,7 +334,7 @@ public class ApartmentFullDescriptionActivity extends AppCompatActivity {
         editGardenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startReportActivity(Field.yard);
+                startReportActivity(Field.garden);
             }
         });
 
